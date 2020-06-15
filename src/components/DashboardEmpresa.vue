@@ -47,7 +47,7 @@
 
     export default {
         name: 'DashboardEmpresa',
-        components: {CrearPasantia, PasoUno, MainContentInternship, Footer},
+        components: {CrearPasantia, MainContentInternship, Footer},
         props: {
             selected: Boolean,
         },
