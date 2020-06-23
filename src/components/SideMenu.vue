@@ -14,7 +14,7 @@
                     <v-icon>account_circle</v-icon>
                 </v-list-item-icon>
                 <v-list-item-content>
-                    <v-list-item-title class="sideMenuTitle">Editar perfil</v-list-item-title>
+                    <v-list-item-title class="sideMenuTitle">Edit Profile</v-list-item-title>
                 </v-list-item-content>
             </v-list-item>
         </v-list>
