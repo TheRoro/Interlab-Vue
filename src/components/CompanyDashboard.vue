@@ -1,26 +1,26 @@
 <template>
     <v-app light id="body" >
         <v-card>
-            <v-navigation-drawer permanent fixed app clipped-left width="200px" class="tamanio">
+            <v-navigation-drawer permanent fixed app clipped-left width="200px" class="size">
                 <v-toolbar flat color="white" dark>
                     <v-img :src="require('../assets/InterlabMini.png')" aspect-ratio="5"/>
                 </v-toolbar>
                 <v-tabs vertical v-model="tab" class="title1">
                     <v-tab :class="title1" @click="setSelected('Dashboard')">
                         <v-icon left size="25">dashboard</v-icon>
-                        <v-list-item-title class="oculto">Dashboard</v-list-item-title>
+                        <v-list-item-title class="hidden">Dashboard</v-list-item-title>
                     </v-tab>
-                    <v-tab :class="title2" @click="setSelected('Pasantias')">
+                    <v-tab :class="title2" @click="setSelected('Internships')">
                         <v-icon left size="25">business_center</v-icon>
-                        <v-list-item-title class="oculto">Mis Ofertas </v-list-item-title>
+                        <v-list-item-title class="hidden">My Internships</v-list-item-title>
                     </v-tab>
-                    <v-tab :class="title3" @click="setSelected('CrearPasantia')">
+                    <v-tab :class="title3" @click="setSelected('CreateInternship')">
                         <v-icon left size="25">add</v-icon>
-                        <v-list-item-title class="oculto">Crear Ofertas </v-list-item-title>
+                        <v-list-item-title class="hidden">Create Internship</v-list-item-title>
                     </v-tab>
-                    <v-tab :class="title4" @click="setSelected('Editar perfil')">
+                    <v-tab :class="title4" @click="setSelected('Edit_Profile')">
                         <v-icon left size="25">account_circle</v-icon>
-                        <v-list-item-title class="oculto">Editar Perfil </v-list-item-title>
+                        <v-list-item-title class="hidden">Edit Profile</v-list-item-title>
                     </v-tab>
                 </v-tabs>
                 <template v-slot:append>
@@ -33,13 +33,13 @@
         <v-content>
             <v-tabs-items v-model="tab">
                 <v-tab-item>
-                    <Footer></Footer>
+                    <MainContentInternship :internships="internships"></MainContentInternship>
                 </v-tab-item>
                 <v-tab-item>
-                    <MainContentInternship :internships="internships" ></MainContentInternship>
+                    <MainContentInternship :internships="internships"></MainContentInternship>
                 </v-tab-item>
                 <v-tab-item>
-                    <CrearPasantia></CrearPasantia>
+                    <CreateInternship></CreateInternship>
                 </v-tab-item>
                 <v-tab-item>
                     <ProfileContent></ProfileContent>
@@ -52,14 +52,13 @@
 
 <script>
     import axios from 'axios'
-    import Footer from "./Footer";
     import MainContentInternship from "./MainContentInternship";
-    import CrearPasantia from "./CrearPasantia";
+    import CreateInternship from "./CreateInternship";
     import ProfileContent from "./ProfileContent";
 
     export default {
-        name: 'DashboardEmpresa',
-        components: {ProfileContent, CrearPasantia, MainContentInternship, Footer},
+        name: 'CompanyDashboard',
+        components: {ProfileContent, CreateInternship, MainContentInternship},
         props: {
             selected: Boolean,
         },
@@ -92,12 +91,12 @@
             },
 
             show(title) {
-                if (title == 'Pasantias') this.isHidden = !this.isHidden
+                if (title === 'Internships') this.isHidden = !this.isHidden
             },
             setSelected(info) {
                 this.selected = info;
 
-                if (info === 'Pasantias') {
+                if (info === 'Internships') {
                     this.title1 = "title";
                     this.title2 = "title-selected";
                     this.title3 = "title";
@@ -109,13 +108,13 @@
                     this.title3 = "title";
                     this.title4 = "title";
                 }
-                if (info === 'CrearPasantia') {
+                if (info === 'CreateInternship') {
                     this.title1 = "title";
                     this.title2 = "title";
                     this.title3 = "title-selected";
                     this.title4 = "title";
                 }
-                if (info === 'Editar perfil') {
+                if (info === 'Edit_Profile') {
                     this.title1 = "title";
                     this.title2 = "title";
                     this.title3 = "title";
@@ -155,18 +154,15 @@
         font-family: 'Khula', sans-serif;
         font-weight: 700;
     }
-    .letra {
-        text-transform:none !important;
-    }
-    .oculto {
+    .hidden {
         text-transform:none !important;
     }
 
     @media screen and (max-width: 780px){
-        .oculto {
+        .hidden {
             display: none;
         }
-        .tamanio {
+        .size {
             width: 100px !important;
         }
     }
