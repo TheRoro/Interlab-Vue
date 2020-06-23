@@ -7,6 +7,8 @@ export default new Router({
     mode: "history",
     routes: [
         { path: "/", alias: "/login", name: "login", component: () => import("./components/Login") },
-        { path: "/dashboard", name: "dashboard", component: () => import("./components/DashboardEmpresa") }
+        { path: "/registerCompany", name: "registerCompany", component: () => import("./components/RegisterCompany")},
+        { path: "/registerStudent", name: "registerStudent", component: () => import("./components/RegisterStudent")},
+        { path: "/companyDashboard", name: "companyDashboard", component: () => import("./components/CompanyDashboard") }
     ]
 });

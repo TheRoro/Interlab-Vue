@@ -1,12 +1,12 @@
 <template>
     <v-container class="profileContent">
-        <v-card-title class="justify-start">Editar Perfil</v-card-title>
+        <v-card-title class="justify-start">Edit Profile</v-card-title>
         <v-card v-if="showPersonal">
-            <p>Información Personal</p>
+            <p>Personal Info</p>
             <v-row>
                 <v-col>
                     <v-text-field
-                            label="Nombre"
+                            label="Name"
                             v-model="firstName"
                             :rules="[v => !!v || 'Name is required']"
                             required>
@@ -14,7 +14,7 @@
                 </v-col>
                 <v-col>
                     <v-text-field
-                            label="Apellido" hint="use special characters such as: #$%!"
+                            label="Last Name" hint="one of your parents last name"
                             v-model="lastName"
                             :rules="[v => !!v || 'Last Name is required']"
                             required>
@@ -28,14 +28,14 @@
                             v-model="country"
                             :rules="[() => !!country || 'This field is required']"
                             :items="countries"
-                            label="Pais"
+                            label="Country"
                             placeholder="Select..."
                             required
                     ></v-autocomplete>
                 </v-col>
                 <v-col>
                     <v-text-field
-                            label="Ciudad" hint="use special characters such as: #$%!"
+                            label="City" hint="Where do you live?"
                             v-model="city"
                             :rules="[v => !!v || 'Last Name is required']"
                             required>
@@ -45,7 +45,7 @@
             <v-row>
                 <v-col cols="12" sm="3">
                     <v-text-field
-                            label="Numero de telefono" hint="use special characters such as: #$%!"
+                            label="Phone Number" hint="In case recruiters need to call you ;)"
                             v-model="phone"
                             :rules="[v => !!v || 'Last Name is required']"
                             required>
@@ -54,11 +54,11 @@
             </v-row>
         </v-card>
         <v-card v-if="showAcademic">
-            <p>Información Académica</p>
+            <p>Academic Info</p>
             <v-row>
                 <v-col cols="12" sm="5">
                     <v-text-field
-                            label="Universidad"
+                            label="University"
                             v-model="univeristy"
                             :rules="[v => !!v || 'University Name is required']"
                             required>
@@ -66,7 +66,7 @@
                 </v-col>
                 <v-col cols="12" sm="5">
                     <v-text-field
-                            label="Carrera"
+                            label="Degree"
                             v-model="degree"
                             :rules="[v => !!v || 'Degree is required']"
                             required>
@@ -85,7 +85,7 @@
             <v-row>
                 <v-col>
                     <v-text-field
-                            label="Sector"
+                            label="Field"
                             v-model="field"
                             :rules="[v => !!v || 'Name is required']"
                             required>
@@ -94,9 +94,10 @@
             </v-row>
         </v-card>
         <v-card-actions>
-            <v-btn href="/MainContent">Regresar</v-btn>
+            <v-btn v-if="showAcademic"  @click="backClick" >Back</v-btn>
             <v-col class="text-right">
-                <v-btn :class="saveButton" @click="saveClick" bottom center class="white--text" color="#4b7bff">Guardar Cambios</v-btn>
+                <v-btn v-if="showPersonal" :class="saveButton" @click="nextClick" bottom center class="white--text" color="#4b7bff">Next</v-btn>
+                <v-btn v-if="showAcademic" :class="saveButton" @click="saveClick" bottom center class="white--text" color="#4b7bff">Save Changes</v-btn>
             </v-col>
         </v-card-actions>
     </v-container>
@@ -117,6 +118,8 @@
                 saveButton: "saveButton",
                 university: null,
                 country: null,
+                city: null,
+                phone: null,
                 degree: null,
                 select: ['1'],
                 showPersonal: true,
@@ -129,10 +132,15 @@
         ),
         methods:{
             saveClick(){
-                this.showPersonal= !this.showPersonal;
-                this.showAcademic= !this.showAcademic;
-                this.university = "hello";
-                console.log(this.university);
+                this.showAcademic = false;
+            },
+            nextClick(){
+                this.showPersonal = false;
+                this.showAcademic = true;
+            },
+            backClick(){
+                this.showPersonal = true;
+                this.showAcademic = false;
             }
         }
     }

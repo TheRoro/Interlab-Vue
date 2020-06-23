@@ -5,69 +5,70 @@
                 <v-card-text class="register">
                     <v-card-text>
                         <div class="form">
-                            <v-text-field label="Correo electrónico" v-model="email"
-                                          :rules="[v => !!v || 'Correo electrónico is requerido']"
+                            <v-text-field label="E-mail" v-model="email"
+                                          :rules="[v => !!v || 'E-mail is required']"
                                           required>
 
                             </v-text-field>
 
-                            <v-text-field label="Nombre y Apellido" v-model="name"
-                                          :rules="[v => !!v || 'Nombre y Apellido']"
+                            <v-text-field label="First and Last Names" v-model="name"
+                                          :rules="[v => !!v || 'First and Last Names are required']"
                                           required>
 
                             </v-text-field>
 
-                            <v-text-field label="Contraseña" v-model="password"
-                                          :rules="[v => !!v || 'Contraseña es requerida']"
+                            <v-text-field label="Password" v-model="password"
+                                          :rules="[v => !!v || 'A password is required']"
                                           type="password" required>
 
                             </v-text-field>
 
-                            <v-text-field label="Confirmar Contraseña" v-model="password2"
-                                          :rules="[v => !!v || 'La contraseña de be igual']"
+                            <v-text-field label="Confirm Password" v-model="password2"
+                                          :rules="[v => !!v || 'Passwords must be the same']"
                                           type="password" required>
 
                             </v-text-field>
                         </div>
                         <div class="links">
-                            <a class="Intership" >¿Eres Estudiante?</a>   <a class="¿login?">¿Ya tienes Cuenta?</a>
+                            <a class="Internship" >¿Are you a Student?</a>   <a class="login">¿Already Have an Account?</a>
                         </div>
                         <div>
                             <v-card-actions>
-                                <v-btn class="btnRegister" :disable="!isValid">Registrarse</v-btn>
+                                <v-btn class="btnRegister" :disable="!isValid">Register</v-btn>
                             </v-card-actions>
                         </div>
 
                     </v-card-text>
                 </v-card-text>
-                <v-card-text class="Encabezado">
+                <v-card-text class="Header">
                     <div>
-                        <img class="logo" src="@/assets/interlab.png" alt="">
+                        <img class="logo" :src="require('../assets/interlab.png')" alt="">
                     </div>
 
                     <div class="ind">
-                        <p class="Student">Empresa</p>
+                        <p class="Student">Company</p>
                     </div>
                 </v-card-text>
 
                 <v-card-text class="Notice" cols="12">
-                    <p class="title"><wm>Registrarse como Empresa:</wm></p>
+                    <p class="title">Register as a Company:</p>
                     <div>
-                        <p class="text">Te permitirá publicar ofertas de pasantías,
-                            acceder a un dashboard y manejar tus
-                            potenciales pasantes a dichas ofertas..</p>
+                        <p class="text">As a company you will be able to create
+                            and publish internship offers in your company
+                            manage your internships and choose from the
+                            best students to hire for the needs of your organisation</p>
                     </div>
-                    <v-btn class="more" color="indigo lighten-5" @click="submit">Saber más</v-btn>
+                    <v-btn class="more" color="indigo lighten-5" @click="submit">More info</v-btn>
                 </v-card-text>
             </v-col>
 
             <v-col cols="12" md="8" class="Title2">
                 <v-card-text class="white--text">
-                    <p class="text-lg-left">Regístrate en</p>
+                    <p class="text-lg-left">Register in</p>
                     <br/> <br/>
                     <h1 class="text-lg-left">Interlab</h1>
                     <br/> <br/> <br/>
-                    <p class="text-lg-left">Ingresa tus datos para continuar</p>
+                    <p class="text-lg-left">Enter your info to proceed</p>
                 </v-card-text>
             </v-col>
 
@@ -109,7 +110,7 @@
     .Student{
         transform: translateX(280px) translateY(-500px);
     }
-    .Intership{
+    .Internship{
         padding-right: 6em;
     }
     .btnRegister{
