@@ -22,6 +22,10 @@
                         <v-icon left size="25">account_circle</v-icon>
                         <v-list-item-title class="oculto">Editar Perfil </v-list-item-title>
                     </v-tab>
+                    <v-tab :class="title5" @click="setSelected('Editar perfil Compnia (Prueba)')">
+                        <v-icon left size="25">account_circle</v-icon>
+                        <v-list-item-title class="oculto">Editar Perfil Compania </v-list-item-title>
+                    </v-tab>
                 </v-tabs>
                 <template v-slot:append>
                     <div class="pa-2">
@@ -44,6 +48,9 @@
                 <v-tab-item>
                     <ProfileContent></ProfileContent>
                 </v-tab-item>
+                <v-tab-item>
+                    <EditProfileCompany></EditProfileCompany>
+                </v-tab-item>
             </v-tabs-items>
         </v-content>
     </v-app>
@@ -56,10 +63,11 @@
     import MainContentInternship from "./MainContentInternship";
     import CrearPasantia from "./CrearPasantia";
     import ProfileContent from "./ProfileContent";
+    import EditProfileCompany from "./EditProfileCompany";
 
     export default {
         name: 'DashboardEmpresa',
-        components: {ProfileContent, CrearPasantia, MainContentInternship, Footer},
+        components: {EditProfileCompany, ProfileContent, CrearPasantia, MainContentInternship, Footer},
         props: {
             selected: Boolean,
         },
@@ -73,6 +81,7 @@
             title3: 'title',
             title4: 'title',
             title5: 'title',
+            title6: 'title',
             errors: [],
             tab: null,
             isHidden: true,
@@ -102,24 +111,35 @@
                     this.title2 = "title-selected";
                     this.title3 = "title";
                     this.title4 = "title";
+                    this.title5 = "title";
                 }
                 if (info === 'Dashboard') {
                     this.title1 = "title-selected";
                     this.title2 = "title";
                     this.title3 = "title";
                     this.title4 = "title";
+                    this.title5 = "title";
                 }
                 if (info === 'CrearPasantia') {
                     this.title1 = "title";
                     this.title2 = "title";
                     this.title3 = "title-selected";
                     this.title4 = "title";
+                    this.title5 = "title";
                 }
                 if (info === 'Editar perfil') {
                     this.title1 = "title";
                     this.title2 = "title";
                     this.title3 = "title";
                     this.title4 = "title-selected";
+                    this.title5 = "title";
+                }
+                if (info === 'Editar perfil Compania') {
+                    this.title1 = "title";
+                    this.title2 = "title";
+                    this.title3 = "title";
+                    this.title4 = "title";
+                    this.title5 = "title-selected";
                 }
                 return this.selected;
             },
