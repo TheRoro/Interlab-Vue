@@ -18,7 +18,16 @@
                         <v-icon left size="25">add</v-icon>
                         <v-list-item-title class="oculto">Crear Ofertas </v-list-item-title>
                     </v-tab>
+                    <v-tab :class="title4" @click="setSelected('Editar perfil')">
+                        <v-icon left size="25">account_circle</v-icon>
+                        <v-list-item-title class="oculto">Editar Perfil </v-list-item-title>
+                    </v-tab>
                 </v-tabs>
+                <template v-slot:append>
+                    <div class="pa-2">
+                        <v-btn href="/" block>Logout</v-btn>
+                    </div>
+                </template>
             </v-navigation-drawer>
         </v-card>
         <v-content>
@@ -32,6 +41,9 @@
                 <v-tab-item>
                     <CrearPasantia></CrearPasantia>
                 </v-tab-item>
+                <v-tab-item>
+                    <ProfileContent></ProfileContent>
+                </v-tab-item>
             </v-tabs-items>
         </v-content>
     </v-app>
@@ -43,10 +55,11 @@
     import Footer from "./Footer";
     import MainContentInternship from "./MainContentInternship";
     import CrearPasantia from "./CrearPasantia";
+    import ProfileContent from "./ProfileContent";
 
     export default {
         name: 'DashboardEmpresa',
-        components: {CrearPasantia, MainContentInternship, Footer},
+        components: {ProfileContent, CrearPasantia, MainContentInternship, Footer},
         props: {
             selected: Boolean,
         },
@@ -101,6 +114,12 @@
                     this.title2 = "title";
                     this.title3 = "title-selected";
                     this.title4 = "title";
+                }
+                if (info === 'Editar perfil') {
+                    this.title1 = "title";
+                    this.title2 = "title";
+                    this.title3 = "title";
+                    this.title4 = "title-selected";
                 }
                 return this.selected;
             },
