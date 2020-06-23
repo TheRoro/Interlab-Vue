@@ -22,6 +22,10 @@
                         <v-icon left size="25">account_circle</v-icon>
                         <v-list-item-title class="hidden">Edit Profile</v-list-item-title>
                     </v-tab>
+                    <v-tab :class="title5" @click="setSelected('Edit_Profile')">
+                        <v-icon left size="25">account_circle</v-icon>
+                        <v-list-item-title class="hidden">Edit Profile Company</v-list-item-title>
+                    </v-tab>
                 </v-tabs>
                 <template v-slot:append>
                     <div class="pa-2">
@@ -44,6 +48,9 @@
                 <v-tab-item>
                     <ProfileContent></ProfileContent>
                 </v-tab-item>
+                <v-tab-item>
+                    <ProfileCompany></ProfileCompany>
+                </v-tab-item>
             </v-tabs-items>
         </v-content>
     </v-app>
@@ -55,10 +62,11 @@
     import MainContentInternship from "./MainContentInternship";
     import CreateInternship from "./CreateInternship";
     import ProfileContent from "./ProfileContent";
+    import ProfileCompany from "./ProfileCompany";
 
     export default {
         name: 'CompanyDashboard',
-        components: {ProfileContent, CreateInternship, MainContentInternship},
+        components: {ProfileCompany, ProfileContent, CreateInternship, MainContentInternship},
         props: {
             selected: Boolean,
         },
@@ -72,6 +80,7 @@
             title3: 'title',
             title4: 'title',
             title5: 'title',
+            title6: 'title',
             errors: [],
             tab: null,
             isHidden: true,
@@ -119,6 +128,13 @@
                     this.title2 = "title";
                     this.title3 = "title";
                     this.title4 = "title-selected";
+                }
+                if (info === 'Edit_Profile_Company') {
+                    this.title1 = "title";
+                    this.title2 = "title";
+                    this.title3 = "title";
+                    this.title4 = "title";
+                    this.title5 = "title-selected";
                 }
                 return this.selected;
             },
