@@ -1,13 +1,14 @@
 <template>
       <v-content>
-      <RegisterStudent/>
+      <RegisterCompany/>
     </v-content>
 </template>
 
 <script>
 //import DashboardEmpresa from "./components/DashboardEmpresa";
 //import Login from "./components/Login";
-import RegisterStudent from "./components/RegisterStudent";
+//import RegisterStudent from "./components/RegisterStudent";
+import RegisterCompany from "./components/RegisterCompany"
 
 export default {
   name: 'App',
@@ -15,7 +16,8 @@ export default {
   components: {
     //DashboardEmpresa,
      //Login,
-      RegisterStudent,
+      //RegisterStudent,
+      RegisterCompany
   },
 
   data: () => ({
