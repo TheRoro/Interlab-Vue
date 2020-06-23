@@ -9,6 +9,7 @@ export default new Router({
         { path: "/", alias: "/login", name: "login", component: () => import("./components/Login") },
         { path: "/registerCompany", name: "registerCompany", component: () => import("./components/RegisterCompany")},
         { path: "/registerStudent", name: "registerStudent", component: () => import("./components/RegisterStudent")},
-        { path: "/companyDashboard", name: "companyDashboard", component: () => import("./components/CompanyDashboard") }
+        { path: "/companyDashboard", name: "companyDashboard", component: () => import("./components/CompanyDashboard")},
+        { path: "/studentDashboard", name: "studentDashboard", component: () => import("./components/StudentDashboard")},
     ]
 });
