@@ -1,9 +1,6 @@
 <template>
     <div id="app">
-        <div class="container mt-3">
-            <router-view/>
-        </div>
-
+        <router-view/>
     </div>
 </template>
 
@@ -20,3 +17,11 @@ export default {
   }),
 };
 </script>
+
+<style scoped>
+    #app{
+        padding-left: 0;
+        margin-left: 0;
+        border-left: 0;
+    }
+</style>
