@@ -1,5 +1,8 @@
 <template>
   <v-app class="indigo darken-4">
+    <div class="container mt-3">
+      <router-view />
+    </div>
     <v-row v-id="logeo">
       <v-col cols="12" md="4" class="white accent-3">
         <v-card-text  class="login">
@@ -26,7 +29,7 @@
             <a class="¿Password?">¿Olvidaste tu contraseña?</a>
           </div>
           <v-card-text class="btn">
-            <v-btn color="primary" :disabled="!isValid">Iniciar Sesión</v-btn>
+            <v-btn href="/dashboard" class="nav-link" color="primary" :disabled="!isValid">Iniciar Sesión</v-btn>
           </v-card-text>
 
         </v-card-text>
@@ -59,7 +62,9 @@
         </v-card-text>
       </v-col>
     </v-row>
+
   </v-app>
+
 </template>
 
 
