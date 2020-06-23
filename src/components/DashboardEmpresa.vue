@@ -3,7 +3,7 @@
         <v-card>
             <v-navigation-drawer permanent fixed app clipped-left width="200px" class="tamanio">
                 <v-toolbar flat color="white" dark>
-                    <v-img :src="require('./assets/InterLab.png')" aspect-ratio="5"/>
+                    <v-img :src="require('../assets/InterlabMini.png')" aspect-ratio="5"/>
                 </v-toolbar>
                 <v-tabs vertical v-model="tab" class="title1">
                     <v-tab :class="title1" @click="setSelected('Dashboard')">
@@ -40,9 +40,8 @@
 
 <script>
     import axios from 'axios'
-    import Footer from "@/components/Footer";
-    import MainContentInternship from "@/components/MainContentInternship";
-    import PasoUno from "@/components/PasoUno";
+    import Footer from "./Footer";
+    import MainContentInternship from "./MainContentInternship";
     import CrearPasantia from "./CrearPasantia";
 
     export default {
