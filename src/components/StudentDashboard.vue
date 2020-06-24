@@ -26,7 +26,7 @@
                 </template>
             </v-navigation-drawer>
         </v-card>
-        <v-content>
+        <v-main>
             <v-tabs-items v-model="tab">
                 <v-tab-item>
                     <MainContentInternship :internships="internships"></MainContentInternship>
@@ -38,7 +38,7 @@
                     <ProfileContent></ProfileContent>
                 </v-tab-item>
             </v-tabs-items>
-        </v-content>
+        </v-main>
     </v-app>
 </template>
 
@@ -52,7 +52,7 @@
         name: 'StudentDashboard',
         components: {ProfileContent, FindInternship, MainContentInternship},
         props: {
-            selected: Boolean,
+
         },
         data: () => ({
             drawer: true,
