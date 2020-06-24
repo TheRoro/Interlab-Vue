@@ -1,77 +1,90 @@
 <template>
-    <v-app class="indigo darken-4">
-        <v-row>
-            <v-col cols="12" md="4" class="white accent-3">
+    <v-app class="content">
+        <v-row no-gutters>
+            <v-col cols="12" md="5" class="left_banner">
+                <v-card-text class="header">
+                    <v-row>
+                        <v-col cols="12" sm="6">
+                            <div>
+                                <a href="/">
+                                    <img class="logo" src="@/assets/interlab.png" alt="">
+                                </a>
+                            </div>
+                        </v-col>
+                        <v-col cols="12" sm="6">
+                            <div class="user">
+                                <p class="company">Company</p>
+                            </div>
+                        </v-col>
+                    </v-row>
+                </v-card-text>
                 <v-card-text class="register">
-                    <v-card-text>
                         <div class="form">
-                            <v-text-field label="E-mail" v-model="email"
+                            <v-text-field class="text-field"  label="E-mail" v-model="email"
                                           :rules="[v => !!v || 'E-mail is required']"
                                           required>
 
                             </v-text-field>
 
-                            <v-text-field label="First and Last Names" v-model="name"
+                            <v-text-field class="text-field"  label="First and Last Names" v-model="name"
                                           :rules="[v => !!v || 'First and Last Names are required']"
                                           required>
 
                             </v-text-field>
 
-                            <v-text-field label="Password" v-model="password"
+                            <v-text-field class="text-field"  label="Password" v-model="password"
                                           :rules="[v => !!v || 'A password is required']"
                                           type="password" required>
 
                             </v-text-field>
 
-                            <v-text-field label="Confirm Password" v-model="password2"
+                            <v-text-field class="text-field" label="Confirm Password" v-model="password2"
                                           :rules="[v => !!v || 'Passwords must be the same']"
                                           type="password" required>
 
                             </v-text-field>
                         </div>
                         <div class="links">
-                            <a class="Internship" >¿Are you a Student?</a>   <a class="login">¿Already Have an Account?</a>
+                            <v-row>
+                                <v-col cols="12" sm="6">
+                                    <a href="/registerStudent" class="student">Are you a student?</a>
+                                </v-col>
+                                <v-col cols="12" sm="6">
+                                    <a href="/" class="already">Already have an account?</a>
+                                </v-col>
+                            </v-row>
                         </div>
                         <div>
-                            <v-card-actions>
-                                <v-btn class="btnRegister" :disable="!isValid">Register</v-btn>
-                            </v-card-actions>
+                            <v-card-text class="btn">
+                                <v-btn href="/companyDashboard" class="register_btn" :disabled="!isValid">Register</v-btn>
+                            </v-card-text>
                         </div>
-
-                    </v-card-text>
                 </v-card-text>
-                <v-card-text class="Header">
-                    <div>
-                        <img class="logo" :src="require('../assets/interlab.png')" alt="">
-                    </div>
-
-                    <div class="ind">
-                        <p class="Student">Company</p>
-                    </div>
-                </v-card-text>
-
-                <v-card-text class="Notice" cols="12">
-                    <p class="title">Register as a Company:</p>
-                    <div>
-                        <p class="text">As a company you will be able to create
-                            and publish internship offers in your company
-                            manage your internships and choose from the
-                            best students to hire for the needs of your organisation</p>
-                    </div>
-                    <v-btn class="more" color="indigo lighten-5" @click="submit">More info</v-btn>
+                <v-card-text class="about">
+                    <v-row>
+                        <v-col cols="12" sm="8">
+                            <p class="about_title">Register as a Company:</p>
+                            <div>
+                                <p class="about_text">As a company you will be able to create
+                                    and publish internship offers in your company
+                                    manage your internships and choose from the
+                                    best students to hire for the needs of your organisation.</p>
+                            </div>
+                        </v-col>
+                        <v-col cols="12" sm="4">
+                            <v-btn href="https://8rb.github.io/Interlab-Landing-Page/" target="_blank" class="about_btn">About Us</v-btn>
+                        </v-col>
+                    </v-row>
                 </v-card-text>
             </v-col>
-
-            <v-col cols="12" md="8" class="Title2">
-                <v-card-text class="white--text">
-                    <p class="text-lg-left">Register in</p>
-                    <br/> <br/>
-                    <h1 class="text-lg-left">Interlab</h1>
-                    <br/> <br/> <br/>
-                    <p class="text-lg-left">Enter your info to proceed</p>
+            <v-col cols="12" md="7" class="right_banner">
+                <v-card-text class="right_text">
+                    <p class="text-lg-left">Welcome To</p>
+                    <h1 class="text-lg-left">InterLab</h1>
+                    <br/>
+                    <p class="text-lg-left">Register as a company</p>
                 </v-card-text>
             </v-col>
-
         </v-row>
     </v-app>
 </template>
@@ -98,32 +111,76 @@
 </script>
 
 <style scoped>
-    .logo{
-        transform: translateX(0px) translateY(-440px);
-    }
-
-    .register{
-        transform: translateY(100px);
-        margin:auto;
-        max-width: 400px;
-    }
-    .Student{
-        transform: translateX(280px) translateY(-500px);
-    }
-    .Internship{
-        padding-right: 6em;
-    }
-    .btnRegister{
-        transform: translateY(20px);
-    }
-
-    .links{
-        transform: translateY(10px);
-    }
-
-    .white--text{
-        transform: translateX(20px) translateY(200px);
+    .left_banner{
         font-size: 3em;
-        margin:auto;
+    }
+    .right_banner{
+        font-size: 8em;
+        color: white;
+        background-color: #2d2d33;
+    }
+    .right_text{
+        margin-top: 2em;
+        margin-left: 1.5em;
+        color: white;
+        font-size: 0.3em;
+    }
+    .register{
+        margin-top: -2.5em;
+    }
+    .logo{
+        margin-top: -1em;
+        margin-left: 0.5em;
+        width: 20%;
+        height: 20%;
+    }
+    .text-field{
+        width: 80%;
+        padding-top: 1.3em;
+        padding-left: 4em;
+    }
+    .user{
+        margin-left: 10em;
+    }
+    .company{
+        margin-left: 1em;
+        font-weight: bold;
+    }
+    .register_btn{
+        margin-top: 1em;
+        background-color: #2d2d33 !important;
+        width: 75%;
+        border-radius: 20px;
+        margin-left: 3em;
+        color: white !important;
+    }
+    .links{
+        margin-top: 1.5em;
+        margin-left: 4em;
+    }
+    .student{
+        text-decoration:none !important;
+        color: black !important;
+    }
+    .already{
+        text-decoration:none !important;
+        color: black !important;
+    }
+    .about{
+        /*margin-top: 4em;*/
+        margin-bottom: 0;
+    }
+    .about_title{
+        font-size: 1.1em;
+        font-weight: bold;
+    }
+    .about_text{
+        font-size: 1em;
+        font-weight: normal;
+    }
+    .about_btn{
+        margin-top: 2.5em;
+        border-radius: 20px;
+        margin-left: 1em;
     }
 </style>
