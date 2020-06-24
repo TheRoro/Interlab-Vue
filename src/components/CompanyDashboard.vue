@@ -3,7 +3,11 @@
         <v-card>
             <v-navigation-drawer permanent fixed app clipped-left width="200px" class="size">
                 <v-toolbar flat color="white" dark>
-                    <v-img :src="require('../assets/InterlabMini.png')" aspect-ratio="5"/>
+                    <div>
+                        <a href="/">
+                            <img class="logo" :src="require('../assets/interlab2.png')" alt=""/>
+                        </a>
+                    </div>
                 </v-toolbar>
                 <v-tabs vertical v-model="tab" class="title1">
                     <v-tab :class="title1" @click="setSelected('Dashboard')">
@@ -149,11 +153,14 @@
 </script>
 
 <style>
-
     #body {
         font-family: 'Khula', sans-serif;
     }
-
+    .logo{
+        max-width:60%;
+        height:45%;
+        margin-left: 2.5em;
+    }
     .title {
         background-color: white;
         color: gray !important;
