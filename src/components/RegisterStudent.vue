@@ -20,25 +20,25 @@
                 </v-card-text>
                 <v-card-text class="register">
                     <div class="form">
-                        <v-text-field class="text-field"  label="E-mail" v-model="email"
+                        <v-text-field class="text-field"  label="E-mail" v-model="newEmail"
                                       :rules="[v => !!v || 'E-mail is required']"
                                       required>
 
                         </v-text-field>
 
-                        <v-text-field class="text-field"  label="First and Last Names" v-model="name"
+                        <v-text-field class="text-field"  label="First and Last Names" v-model="newName"
                                       :rules="[v => !!v || 'First and Last Names are required']"
                                       required>
 
                         </v-text-field>
 
-                        <v-text-field class="text-field"  label="Password" v-model="password"
+                        <v-text-field class="text-field"  label="Password" v-model="newPassword"
                                       :rules="[v => !!v || 'A password is required']"
                                       type="password" required>
 
                         </v-text-field>
 
-                        <v-text-field class="text-field" label="Confirm Password" v-model="password2"
+                        <v-text-field class="text-field" label="Confirm Password" v-model="newPassword2"
                                       :rules="[v => !!v || 'Passwords must be the same']"
                                       type="password" required>
 
@@ -56,7 +56,7 @@
                     </div>
                     <div>
                         <v-card-text class="btn">
-                            <v-btn href="/studentDashboard" class="register_btn" :disabled="!isValid">Register</v-btn>
+                            <v-btn  @click="createUser" class="register_btn" :disabled="!isValid">Register</v-btn>
                         </v-card-text>
                     </div>
                 </v-card-text>
@@ -88,15 +88,67 @@
     </v-app>
 </template>
 <script>
+    import axios from "axios";
+
     export default {
         name: "RegisterStudent",
         data: () => ({
-            email:null,
-            name:null,
-            password:null,
-            password2:null,
-            isValid:true,
-        })
+            newEmail: '',
+            newName: '',
+            newPassword: '',
+            newPassword2: '',
+            isValid: true,
+            newRole: '',
+            newFirstName: '',
+            newLastName:  '',
+            users: [],
+            profiles: []
+        }),
+        methods: {
+            submit() {
+                if(this.$ref.form.valid()){
+                    console.log(this.newEmail, this.newName, this.newPassword,
+                        this.newPassword2, this.isValid)
+                }
+            },
+            createUser(){
+                let today = new Date();
+                this.newFirstName = this.newName.split(" ")[0];
+                this.newLastName = this.newName.split(" ")[1];
+                this.newRole = "student";
+                axios.post('https://interlabwapostudios.azurewebsites.net/api/users', {
+                    username: this.newEmail,
+                    password: this.newPassword,
+                    email: this.email,
+                    date_created: today,
+
+                }).then((response) =>{
+                    const data = response.data;
+                    this.users.push(data);
+                    console.log(response);
+                    this.users.lastIndex();
+                })
+                console.log("creating user...", this.newEmail, this.newFirstName, this.newLastName, this.newPassword,
+                    today.toString(), this.isValid)
+                axios.post('https://interlabwapostudios.azurewebsites.net/api/profiles',{
+                    role: this.newRole,
+                    first_name: this.newName.split(" ")[0],
+                    last_name: this.newName.split(" ")[1],
+                    field: '',
+                    phone: '',
+                    description: '',
+                    country: '',
+                    city: '',
+                    user_id: ''
+                }).then((response) =>{
+                    const data = response.data;
+                    this.profiles.push(data);
+                    console.log(response);
+                })
+                console.log("creating profiles' user...", this.newRole, this.newFirstName, this.newPassword,
+                    this.newPassword2, today.toString(), this.isValid)
+            }
+        }
     }
 </script>
 
