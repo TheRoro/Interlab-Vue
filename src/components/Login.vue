@@ -48,7 +48,7 @@
             </v-row>
           </div>
           <v-card-text class="btn">
-            <v-btn href="/companyDashboard" class="login_btn" color="primary" :disabled="!isValid">Log In</v-btn>
+            <v-btn @click="validateUser" class="login_btn" color="primary" :disabled="!isValid" >Log In</v-btn>
           </v-card-text>
         </v-card-text>
 
@@ -81,21 +81,45 @@
 
 
 <script>
+  import axios from "axios";
+  import router from "../router";
 
   export default {
     name: "Login",
-    components:{
-    },
-
     methods: {
+      validateUser(){
+          axios.get('https://interlabwapostudios.azurewebsites.net/api/users')
+          .then(response => {
+            this.users = response.data;
+            console.log('Interlab Users:');
+            console.log(response.data);
+            for(let i = 0; i < response.data.length; i++){
+              if(response.data[i].username === this.email ||
+                   response.data[i].email === this.email &&
+                   response.data[i].password === this.password){
+                console.log("Success");
+                this.auth = true;
+                router.push({ path: `/studentDashboard` })
+                break;
+              }
+            }
+            if(!this.auth){
+              alert("Wrong username or password");
+            }
 
+          }).catch(function (error) {
+          console.log(error);
+        });
+      }
     },
     data: () => ({
       email:null,
       isValid:true,
-
       show1: false,
+      auth: false,
       password: '',
+      ref: "/",
+      users: [],
       rules: {
         required: value => !!value || 'Required.',
         min: v => v.length >= 8 || 'Min 8 characters',
