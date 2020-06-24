@@ -2,17 +2,18 @@
   <v-app class="content">
     <v-row no-gutters>
       <v-col cols="12" sm="5" class="left_banner">
-        <v-card-text class="Header">
+        <v-card-text class="header">
           <v-row>
             <v-col cols="12" sm="6">
               <div>
-                <img class="logo" src="@/assets/interlab.png" alt="">
+                <a href="/">
+                  <img class="logo" src="@/assets/interlab.png" alt="">
+                </a>
               </div>
             </v-col>
             <v-col cols="12" sm="6">
               <div class="language">
-                <a class="esp">Esp</a>
-                <a class="eng">Eng</a>
+                <p class="eng">Eng</p>
               </div>
             </v-col>
           </v-row>
@@ -37,8 +38,14 @@
             ></v-text-field>
           </div>
           <div class="links">
-            <a href="/registerCompany" class="create">Create an Account</a>
-            <a class="forgot">¿Forgot your password?</a>
+            <v-row>
+              <v-col cols="12" sm="6">
+                <a href="/registerCompany" class="reg_company">Register as a company</a>
+              </v-col>
+              <v-col cols="12" sm="6">
+                <a href="/registerStudent" class="reg_student">Register as a Student</a>
+              </v-col>
+            </v-row>
           </div>
           <v-card-text class="btn">
             <v-btn href="/companyDashboard" class="login_btn" color="primary" :disabled="!isValid">Log In</v-btn>
@@ -54,7 +61,7 @@
               </div>
             </v-col>
             <v-col cols="12" sm="4">
-          <v-btn class="about_btn">About Us</v-btn>
+          <v-btn href="https://8rb.github.io/Interlab-Landing-Page/" target="_blank" class="about_btn">About Us</v-btn>
               </v-col>
           </v-row>
         </v-card-text>
@@ -69,9 +76,7 @@
         </v-card-text>
       </v-col>
     </v-row>
-
   </v-app>
-
 </template>
 
 
@@ -85,8 +90,6 @@
     methods: {
 
     },
-
-
     data: () => ({
       email:null,
       isValid:true,
@@ -118,15 +121,19 @@
       margin-left: 0;
       border-left: 0;
     }
+    .login{
+      padding-top: 1em;
+    }
     .text-field{
       width: 80%;
+      padding-top: 1.5em;
       padding-left: 4em;
     }
     .left_banner{
       font-size: 3em;
     }
     .right_banner{
-      font-size: 10em;
+      font-size: 8em;
       color: white;
       background-color: #282a3f;
     }
@@ -135,21 +142,25 @@
     }
     .eng{
       margin-left: 1em;
+      font-weight: bold;
+      color: #282a3f;
     }
     .links{
-      margin-top: 2em;
+      margin-top: 1.5em;
       margin-left: 4em;
     }
-    .create{
+    .reg_company{
       text-decoration:none !important;
+      color: #282a3f !important;
     }
-    .forgot{
-      margin-left: 6em;
+    .reg_student{
+      text-decoration:none !important;
+      color: #282a3f !important;
     }
     .login_btn{
       margin-top: 1em;
       background-color: #2c305b !important;
-      width: 80%;
+      width: 75%;
       border-radius: 20px;
       margin-left: 3em;
     }
@@ -160,7 +171,8 @@
       height: 20%;
     }
     .about{
-      margin-top: 4em;
+      /*margin-top: 4em;*/
+      margin-bottom: 0;
     }
     .about_title{
       font-size: 1em;
