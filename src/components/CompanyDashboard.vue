@@ -23,8 +23,8 @@
                         <v-list-item-title class="hidden">Edit Profile</v-list-item-title>
                     </v-tab>
                     <v-tab :class="title5" @click="setSelected('Edit_Profile')">
-                        <v-icon left size="25">account_circle</v-icon>
-                        <v-list-item-title class="hidden">Edit Profile Company</v-list-item-title>
+                        <v-icon left size="25">how_to_reg</v-icon>
+                        <v-list-item-title class="hidden">History Intern</v-list-item-title>
                     </v-tab>
                 </v-tabs>
                 <template v-slot:append>
@@ -46,10 +46,10 @@
                     <CreateInternship></CreateInternship>
                 </v-tab-item>
                 <v-tab-item>
-                    <ProfileContent></ProfileContent>
+                    <ProfileCompany></ProfileCompany>
                 </v-tab-item>
                 <v-tab-item>
-                    <ProfileCompany></ProfileCompany>
+                    <QualifyIntern></QualifyIntern>
                 </v-tab-item>
             </v-tabs-items>
         </v-content>
@@ -61,12 +61,13 @@
     import axios from 'axios'
     import MainContentInternship from "./MainContentInternship";
     import CreateInternship from "./CreateInternship";
-    import ProfileContent from "./ProfileContent";
     import ProfileCompany from "./ProfileCompany";
+    import QualifyIntern from "./QualifyIntern";
+    //import Testing from "./Testing";
 
     export default {
         name: 'CompanyDashboard',
-        components: {ProfileCompany, ProfileContent, CreateInternship, MainContentInternship},
+        components: {QualifyIntern,  ProfileCompany, CreateInternship, MainContentInternship},
         props: {
             selected: Boolean,
         },
@@ -129,7 +130,7 @@
                     this.title3 = "title";
                     this.title4 = "title-selected";
                 }
-                if (info === 'Edit_Profile_Company') {
+                if (info === 'History_Intern') {
                     this.title1 = "title";
                     this.title2 = "title";
                     this.title3 = "title";
