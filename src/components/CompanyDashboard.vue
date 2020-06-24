@@ -22,7 +22,7 @@
                         <v-icon left size="25">account_circle</v-icon>
                         <v-list-item-title class="hidden">Edit Profile</v-list-item-title>
                     </v-tab>
-                    <v-tab :class="title5" @click="setSelected('Edit_Profile')">
+                    <v-tab :class="title5" @click="setSelected('History_Intern')">
                         <v-icon left size="25">how_to_reg</v-icon>
                         <v-list-item-title class="hidden">History Intern</v-list-item-title>
                     </v-tab>
@@ -111,24 +111,28 @@
                     this.title2 = "title-selected";
                     this.title3 = "title";
                     this.title4 = "title";
+                    this.title5 = "title";
                 }
                 if (info === 'Dashboard') {
                     this.title1 = "title-selected";
                     this.title2 = "title";
                     this.title3 = "title";
                     this.title4 = "title";
+                    this.title5 = "title";
                 }
                 if (info === 'CreateInternship') {
                     this.title1 = "title";
                     this.title2 = "title";
                     this.title3 = "title-selected";
                     this.title4 = "title";
+                    this.title5 = "title";
                 }
                 if (info === 'Edit_Profile') {
                     this.title1 = "title";
                     this.title2 = "title";
                     this.title3 = "title";
                     this.title4 = "title-selected";
+                    this.title5 = "title";
                 }
                 if (info === 'History_Intern') {
                     this.title1 = "title";
