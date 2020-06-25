@@ -2,9 +2,9 @@
     <v-layout class="internship_body" id="style-1">
         <v-flex class="internship_container">
             <div>
-                <h1 class="welcome">Welcome: Student </h1>
+                <h1 class="welcome">Welcome: Company </h1>
             </div>
-            <h1 class="results_title">Take a look to some of the companies currently hiring: </h1>
+            <h1 class="posting">Take a look to some of the companies currently posting: </h1>
             <v-row>
                 <v-col>
                     <div v-for="company in companies.slice(0,Math.round(companies.length/2))" :key="company.id">
@@ -51,7 +51,7 @@
 
 <script>
     export default {
-        name: "StudentHome",
+        name: "CompanyHome",
         props: {
             companies: Array
         },
@@ -82,13 +82,6 @@
         font-family: 'Khula', sans-serif !important;
         font-weight: 300;
     }
-    .welcome{
-        margin-top: 1em;
-        margin-bottom: 0.5em;
-        font-family: 'Khula', sans-serif !important;
-        font-weight: 300;
-        font-size: 1.3em;
-    }
     .sub-headline{
         margin-left: 0.5em;
         margin-top: -1em;
@@ -105,11 +98,18 @@
         height: 90%;
         border-radius: 20px !important;
     }
-    .results_title{
+    .posting{
         margin-top: 0.5em;
         margin-bottom: 0.5em;
         font-family: 'Khula', sans-serif !important;
         font-weight: 500;
+    }
+    .welcome{
+        margin-top: 1em;
+        margin-bottom: 0.5em;
+        font-family: 'Khula', sans-serif !important;
+        font-weight: 300;
+        font-size: 1.3em;
     }
     .internship_card{
         margin-bottom: 1em;
@@ -122,4 +122,5 @@
         margin-left: 1em;
     }
 </style>
+
 

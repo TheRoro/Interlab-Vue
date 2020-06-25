@@ -1,5 +1,5 @@
 <template>
-    <v-app light id="body" >
+    <v-app id="style-1">
         <v-card>
             <v-navigation-drawer permanent fixed app clipped-left width="200px" class="size">
                 <v-toolbar flat color="white" dark>
@@ -8,7 +8,6 @@
                             <img class="logo" :src="require('../assets/interlab2.png')" alt=""/>
                         </a>
                     </div>
-
                 </v-toolbar>
                 <v-tabs vertical v-model="tab" class="title1">
                     <v-tab :class="title1" @click="setSelected('Dashboard')">
@@ -82,7 +81,7 @@
         },
         methods: {
             setCompany() {
-                axios.get('https://interlab4.azurewebsites.net/api/companies/1/internships')
+                axios.get('https://interlab4.azurewebsites.net/api/internships')
                     .then(response => {
                         this.internships = response.data;
                         console.log('Source Internships:');
@@ -130,7 +129,7 @@
 </script>
 
 <style scoped>
-    #body {
+    #style-1 {
         font-family: 'Khula', sans-serif;
     }
     .logo{
@@ -140,24 +139,22 @@
     }
     .title {
         background-color: white;
-        color: gray !important;
-        font-family: 'Khula', sans-serif !important;
+        color: gray;
+        font-weight: 300;
     }
 
     .title:hover {
         background-color: lightgray;
-        font-family: 'Khula', sans-serif !important;
     }
 
     .title-selected {
         background-color: #4B7BFF;
-        color: white !important;
-        font-family: 'Khula', sans-serif !important;
+        color: white;
+        font-weight: 300;
     }
 
     .title-item {
-        font-family: 'Khula', sans-serif;
-        font-weight: 700;
+        font-weight: 300;
     }
     .hidden {
         text-transform:none !important;

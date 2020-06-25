@@ -26,11 +26,20 @@
 
                             </v-text-field>
 
-                            <v-text-field class="text-field"  label="First and Last Names" v-model="newName"
-                                          :rules="[v => !!v || 'First and Last Names are required']"
-                                          required>
-
-                            </v-text-field>
+                            <v-row>
+                                <v-col>
+                                    <v-text-field class="text-field first_name"  label="First Name" v-model="newFirstName"
+                                                  :rules="[v => !!v || 'First and Last Names are required']"
+                                                  required>
+                                    </v-text-field>
+                                </v-col>
+                                <v-col>
+                                    <v-text-field class="text-field last_name"  label="Last Name" v-model="newLastName"
+                                                  :rules="[v => !!v || 'First and Last Names are required']"
+                                                  required>
+                                    </v-text-field>
+                                </v-col>
+                            </v-row>
 
                             <v-text-field class="text-field"  label="Password" v-model="newPassword"
                                           :rules="[v => !!v || 'A password is required']"
@@ -56,7 +65,7 @@
                         </div>
                         <div>
                             <v-card-text class="btn">
-                                <v-btn href="companyDashboard" @click="createUser" class="register_btn">Register</v-btn>
+                                <v-btn @click="createUser" class="register_btn">Register</v-btn>
                             </v-card-text>
                         </div>
                 </v-card-text>
@@ -91,6 +100,7 @@
 
 <script>
     import axios from 'axios'
+    import {userId} from "./Login";
     export default {
         name: "RegisterCompany",
         data: () => ({
@@ -103,7 +113,8 @@
             newFirstName: '',
             newLastName:  '',
             users: [],
-            profiles: []
+            profiles: [],
+            userId: null,
         }),
         methods: {
             submit() {
@@ -113,9 +124,7 @@
                 }
             },
             createUser(){
-                let today = new Date();
-                this.newFirstName = this.newName.split(" ")[0];
-                this.newLastName = this.newName.split(" ")[1];
+                let today = new Date().toString();
                 this.newRole = "company";
                 axios.post('https://interlab4.azurewebsites.net/api/users', {
                     username: this.newEmail,
@@ -131,7 +140,25 @@
                 })
                 console.log("creating user...", this.newEmail, this.newFirstName, this.newLastName, this.newPassword,
                     today.toString(), this.isValid)
-                axios.post('https://interlab4.azurewebsites.net/api/profiles',{
+                //get user
+                axios.get('https://interlab4.azurewebsites.net/api/users')
+                    .then(response => {
+                        this.users = response.data;
+                        console.log('Source Users:');
+                        console.log(response.data);
+                        this.userId = 0;
+                        this.users = response.data;
+                        //Validating user
+                        for (let i = 0; i < response.data.length; i++) {
+                            if (response.data[i].email === this.newEmail) {
+                                console.log("New User Found");
+                                this.userId = response.data[i].id;
+                                console.log("User id: ", userId);
+                                break;
+                            }
+                        }
+                    })
+                axios.post('https://interlab4.azurewebsites.net/api/users' + userId + '/profiles',{
                     role: this.newRole,
                     first_name: this.newName.split(" ")[0],
                     last_name: this.newName.split(" ")[1],
@@ -140,7 +167,7 @@
                     description: '',
                     country: '',
                     city: '',
-                    user_id: ''
+                    user_id: this.userId,
                 }).then((response) =>{
                     const data = response.data;
                     this.profiles.push(data);
@@ -148,6 +175,7 @@
                 })
                 console.log("creating profiles' user...", this.newRole, this.newFirstName, this.newPassword,
                     this.newPassword2, today.toString(), this.isValid)
+                //router.push({path: `/companyDashboard`})
             }
         }
     }
@@ -225,5 +253,12 @@
         margin-top: 2.5em;
         border-radius: 20px;
         margin-left: 1em;
+    }
+    .first_name{
+        width: 90%;
+    }
+    .last_name{
+        margin-left: -4.5em;
+        width: 90%;
     }
 </style>

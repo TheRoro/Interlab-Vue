@@ -375,16 +375,17 @@
     .subtitle-field {
         font-size: 20px;
         color: black;
+        font-weight: 300;
     }
 
     .title1 {
         font-family: 'Khula', sans-serif;
-        font-weight: bold;
+        font-weight: 400;
         font-size: 1.5em;
     }
 
     .subtitle {
-        font-weight: 600;
+        font-weight: 400;
         font-size: 22px;
         color: black;
         justify-content: center;

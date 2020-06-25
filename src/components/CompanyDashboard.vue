@@ -1,5 +1,5 @@
 <template>
-    <v-app light id="body" >
+    <v-app id="style-1" >
         <v-card>
             <v-navigation-drawer permanent fixed app clipped-left width="200px" class="size">
                 <v-toolbar flat color="white" dark>
@@ -38,10 +38,10 @@
                 </template>
             </v-navigation-drawer>
         </v-card>
-        <v-content>
+        <v-main>
             <v-tabs-items v-model="tab">
                 <v-tab-item>
-                    <MainContentInternship :internships="internships"></MainContentInternship>
+                    <CompanyHome :companies="companies"></CompanyHome>
                 </v-tab-item>
                 <v-tab-item>
                     <MainContentInternship :internships="internships"></MainContentInternship>
@@ -56,13 +56,14 @@
                     <QualifyIntern></QualifyIntern>
                 </v-tab-item>
             </v-tabs-items>
-        </v-content>
+        </v-main>
     </v-app>
 </template>
 
 
 <script>
     import axios from 'axios'
+    import CompanyHome from "./CompanyHome";
     import MainContentInternship from "./MainContentInternship";
     import CreateInternship from "./CreateInternship";
     import ProfileCompany from "./ProfileCompany";
@@ -71,13 +72,14 @@
 
     export default {
         name: 'CompanyDashboard',
-        components: {QualifyIntern,  ProfileCompany, CreateInternship, MainContentInternship},
+        components: {QualifyIntern,  ProfileCompany, CreateInternship, MainContentInternship, CompanyHome},
         props: {
-            selected: Boolean,
+
         },
         data: () => ({
             drawer: true,
             internships: [],
+            companies: [],
             img: 'require(\'./assets/logo.jpg\')',
             selected: '',
             title1: 'title',
@@ -93,6 +95,7 @@
         }),
         created() {
             this.setCompany();
+            this.allCompanies();
         },
         methods: {
             setCompany() {
@@ -103,7 +106,14 @@
                         console.log(response.data);
                     })
             },
-
+            allCompanies(){
+                axios.get('https://interlab4.azurewebsites.net/api/companies')
+                    .then(response => {
+                        this.companies = response.data;
+                        console.log('Source Companies:');
+                        console.log(response.data);
+                    })
+            },
             show(title) {
                 if (title === 'Internships') this.isHidden = !this.isHidden
             },
@@ -152,8 +162,8 @@
     };
 </script>
 
-<style>
-    #body {
+<style scoped>
+    #style-1 {
         font-family: 'Khula', sans-serif;
     }
     .logo{
@@ -163,23 +173,20 @@
     }
     .title {
         background-color: white;
-        color: gray !important;
-        font-family: 'Khula', sans-serif !important;
+        color: gray;
+        font-weight: 300;
     }
 
     .title:hover {
         background-color: lightgray;
-        font-family: 'Khula', sans-serif !important;
     }
 
     .title-selected {
         background-color: #4B7BFF;
-        color: white !important;
-        font-family: 'Khula', sans-serif !important;
+        color: white;
+        font-weight: 300;
     }
-
     .title-item {
-        font-family: 'Khula', sans-serif;
         font-weight: 700;
     }
     .hidden {

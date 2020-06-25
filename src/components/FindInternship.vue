@@ -1,9 +1,9 @@
 <template>
     <v-layout class="internship_body" id="style-1">
-            <v-dialog v-model="dialog" width="400">
+            <v-dialog v-model="dialog" width="450">
                 <template v-slot:activator="{ on, attrs }">
                     <v-flex class="internship_container">
-                        <div>
+                        <div v-if="false">
                             <v-text-field v-on:keyup.enter="submit" class="search_bar" type="text" placeholder="Search..."></v-text-field>
                         </div>
 
@@ -15,7 +15,7 @@
                                         <div class="upper_box">
                                             <v-row>
                                                 <v-col cols="12" sm="8">
-                                                    <h1 class="headline">internship.jobTitle</h1>
+                                                    <h1 class="headline">{{internship.jobTitle}}</h1>
                                                     <v-row>
                                                         <v-col cols="12" sm="1">
                                                             <v-icon class="location_icon">location_on</v-icon>
@@ -48,7 +48,7 @@
                                         <div class="upper_box">
                                             <v-row>
                                                 <v-col cols="12" sm="8">
-                                                    <h1 class="headline">internship.jobTitle</h1>
+                                                    <h1 class="headline">{{internship.jobTitle}}</h1>
                                                     <v-row>
                                                         <v-col cols="12" sm="1">
                                                             <v-icon class="location_icon">location_on</v-icon>
@@ -79,7 +79,7 @@
                     </v-flex>
                 </template>
                 <v-card>
-                    <v-card-title class="headline grey lighten-2" primary-title>Success!</v-card-title>
+                    <v-card-title>Success!</v-card-title>
                     <v-card-text>Successfully applied to this internship</v-card-text>
                     <v-card-text>Check it out in your requests ;)</v-card-text>
                     <v-card-actions>
@@ -118,11 +118,15 @@
     }
     .headline{
         margin-left: 1em;
-        margin-top: 0.5em;
+        padding-top: 0.5em;
+        font-family: 'Khula', sans-serif !important;
+        font-weight: 300;
     }
     .sub-headline{
         margin-left: 0.5em;
         margin-top: -1em;
+        font-family: 'Khula', sans-serif !important;
+        font-weight: 300;
     }
     .upper_box{
         background-image: url("https://thumbs.dreamstime.com/b/blurred-blue-bright-gradient-blue-light-gradient-purple-background-violet-purple-gradient-soft-light-wallpaper-blurred-blue-125220733.jpg");
@@ -144,15 +148,14 @@
     .results_title{
         margin-top: 0.5em;
         margin-bottom: 0.5em;
+        font-family: 'Khula', sans-serif !important;
+        font-weight: 500;
     }
     .internship_card{
         margin-bottom: 1em;
         border-radius: 20px !important;
     }
     .internship_body{
-        font-family: 'Khula', sans-serif !important;
-    }
-    #style-1 {
         font-family: 'Khula', sans-serif !important;
     }
     .search_bar{
