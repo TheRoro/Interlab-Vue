@@ -18,10 +18,8 @@ export default {
 };
 </script>
 
-<style scoped>
+<style>
     #app{
-        padding-left: 0;
-        margin-left: 0;
-        border-left: 0;
+        font-family: 'Khula', sans-serif;
     }
 </style>
