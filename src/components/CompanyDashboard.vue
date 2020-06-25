@@ -96,7 +96,7 @@
         },
         methods: {
             setCompany() {
-                axios.get('https://interlabwapostudios.azurewebsites.net/api/companies/1/internships')
+                axios.get('https://interlab4.azurewebsites.net/api/companies/1/internships')
                     .then(response => {
                         this.internships = response.data;
                         console.log('Source Internships:');
