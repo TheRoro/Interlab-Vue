@@ -101,6 +101,7 @@
 <script>
     import axios from 'axios'
     import {userId} from "./Login";
+    import router from "../router";
     export default {
         name: "RegisterCompany",
         data: () => ({
@@ -175,7 +176,7 @@
                 })
                 console.log("creating profiles' user...", this.newRole, this.newFirstName, this.newPassword,
                     this.newPassword2, today.toString(), this.isValid)
-                //router.push({path: `/companyDashboard`})
+                router.push({path: `/companyDashboard`})
             }
         }
     }
