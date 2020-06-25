@@ -15,8 +15,15 @@
                                         <div class="upper_box">
                                             <v-row>
                                                 <v-col cols="12" sm="8">
-                                                    <span class="headline">Software Engineer</span>
-                                                    <v-card-text class="sub-headline">{{ internship.description }} </v-card-text>
+                                                    <h1 class="headline">internship.jobTitle</h1>
+                                                    <v-row>
+                                                        <v-col cols="12" sm="1">
+                                                            <v-icon class="location_icon">location_on</v-icon>
+                                                        </v-col>
+                                                        <v-col cols="12" sm="11">
+                                                            <v-card-text class="sub-headline">{{ internship.location }}</v-card-text>
+                                                        </v-col>
+                                                    </v-row>
                                                 </v-col>
                                                 <v-col cols="12" sm="4">
                                                     <v-btn class="apply_btn" dark v-bind="attrs" v-on="on" @click="selectButton">Apply</v-btn>
@@ -25,10 +32,9 @@
                                         </div>
                                         <v-row>
                                             <v-col cols="12" sm="8">
-                                                <v-card-text> State: {{ internship.state }}</v-card-text>
-                                                <v-card-text > Salary: $ {{ internship.salary }} - {{internship.salary+"0"}} </v-card-text>
-                                                <v-card-text> Starting Date: {{ internship.startingDate }}</v-card-text>
-                                                <v-card-text> Finishing Date: {{ internship.finishingDate }}</v-card-text>
+                                                <v-card-text> About the job: {{ internship.description }}</v-card-text>
+                                                <v-card-text> Salary: $ {{ internship.salary }} - {{internship.salary*2}} </v-card-text>
+                                                <v-card-text> Date of internship: {{ internship.startingDate.substring(0,10) }} - {{ internship.finishingDate.substring(0,10) }}</v-card-text>
                                             </v-col>
                                             <v-col cols="12" sm="4">
                                             </v-col>
@@ -42,20 +48,26 @@
                                         <div class="upper_box">
                                             <v-row>
                                                 <v-col cols="12" sm="8">
-                                                    <span class="headline">UX Designer</span>
-                                                    <v-card-text class="sub-headline">{{ internship.description }} </v-card-text>
+                                                    <h1 class="headline">internship.jobTitle</h1>
+                                                    <v-row>
+                                                        <v-col cols="12" sm="1">
+                                                            <v-icon class="location_icon">location_on</v-icon>
+                                                        </v-col>
+                                                        <v-col cols="12" sm="11">
+                                                            <v-card-text class="sub-headline">{{ internship.location }}</v-card-text>
+                                                        </v-col>
+                                                    </v-row>
                                                 </v-col>
                                                 <v-col cols="12" sm="4">
-                                                    <v-btn class="apply_btn" dark v-bind="attrs" v-on="on"  @click="selectButton">Apply</v-btn>
+                                                    <v-btn class="apply_btn" dark v-bind="attrs" v-on="on" @click="selectButton">Apply</v-btn>
                                                 </v-col>
                                             </v-row>
                                         </div>
                                         <v-row>
                                             <v-col cols="12" sm="8">
-                                                <v-card-text> State: {{ internship.state }}</v-card-text>
-                                                <v-card-text > Salary: $ {{ internship.salary }} - {{internship.salary+"0"}} </v-card-text>
-                                                <v-card-text> Starting Date: {{ internship.startingDate }}</v-card-text>
-                                                <v-card-text> Finishing Date: {{ internship.finishingDate }}</v-card-text>
+                                                <v-card-text> About the job: {{ internship.description }}</v-card-text>
+                                                <v-card-text> Salary: $ {{ internship.salary }} - {{internship.salary*2}} </v-card-text>
+                                                <v-card-text> Date of internship: {{ internship.startingDate.substring(0,10) }} - {{ internship.finishingDate.substring(0,10) }}</v-card-text>
                                             </v-col>
                                             <v-col cols="12" sm="4">
                                             </v-col>
@@ -106,13 +118,15 @@
     }
     .headline{
         margin-left: 1em;
+        margin-top: 0.5em;
     }
     .sub-headline{
-        margin-left: 1.2em;
+        margin-left: 0.5em;
+        margin-top: -1em;
     }
     .upper_box{
         background-image: url("https://thumbs.dreamstime.com/b/blurred-blue-bright-gradient-blue-light-gradient-purple-background-violet-purple-gradient-soft-light-wallpaper-blurred-blue-125220733.jpg");
-        padding-bottom: 1em;
+        height: 90%;
         border-radius: 20px !important;
     }
     .apply_btn{
@@ -125,7 +139,7 @@
         border-radius: 20px;
         color: white;
         text-transform:none !important;
-        height: 50% !important;
+        height: 35% !important;
     }
     .results_title{
         margin-top: 0.5em;
@@ -144,5 +158,9 @@
     .search_bar{
         width: 90%;
         margin-left: 2em;
+    }
+    .location_icon{
+        margin-left: 1em;
+        margin-top: 0em;
     }
 </style>
