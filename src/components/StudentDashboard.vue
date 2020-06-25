@@ -12,8 +12,8 @@
                 </v-toolbar>
                 <v-tabs vertical v-model="tab" class="title1">
                     <v-tab :class="title1" @click="setSelected('Dashboard')">
-                        <v-icon left size="25">dashboard</v-icon>
-                        <v-list-item-title class="hidden">Dashboard</v-list-item-title>
+                        <v-icon left size="25">home</v-icon>
+                        <v-list-item-title class="hidden">Home</v-list-item-title>
                     </v-tab>
                     <v-tab :class="title3" @click="setSelected('FindInternship')">
                         <v-icon left size="25">search</v-icon>
@@ -34,7 +34,7 @@
         <v-main>
             <v-tabs-items v-model="tab">
                 <v-tab-item>
-                    <MainContentInternship :internships="internships"></MainContentInternship>
+                    <StudentHome :companies="companies"></StudentHome>
                 </v-tab-item>
                 <v-tab-item>
                     <FindInternship :internships="internships"></FindInternship>
@@ -49,19 +49,21 @@
 
 <script>
     import axios from 'axios'
-    import MainContentInternship from "./MainContentInternship";
+    import StudentHome from "./StudentHome";
     import FindInternship from "./FindInternship";
     import ProfileContent from "./ProfileContent";
 
+
     export default {
         name: 'StudentDashboard',
-        components: {ProfileContent, FindInternship, MainContentInternship},
+        components: {ProfileContent, FindInternship, StudentHome},
         props: {
 
         },
         data: () => ({
             drawer: true,
             internships: [],
+            companies: [],
             img: 'require(\'./assets/logo.jpg\')',
             selected: '',
             title1: 'title',
@@ -76,13 +78,22 @@
         }),
         created() {
             this.setCompany();
+            this.allCompanies();
         },
         methods: {
             setCompany() {
-                axios.get('https://interlabwapostudios.azurewebsites.net/api/companies/1/internships')
+                axios.get('https://interlab4.azurewebsites.net/api/companies/1/internships')
                     .then(response => {
                         this.internships = response.data;
                         console.log('Source Internships:');
+                        console.log(response.data);
+                    })
+            },
+            allCompanies(){
+                axios.get('https://interlab4.azurewebsites.net/api/companies')
+                    .then(response => {
+                        this.companies = response.data;
+                        console.log('Source Companies:');
                         console.log(response.data);
                     })
             },

@@ -116,7 +116,7 @@
                 this.newFirstName = this.newName.split(" ")[0];
                 this.newLastName = this.newName.split(" ")[1];
                 this.newRole = "student";
-                axios.post('https://interlabwapostudios.azurewebsites.net/api/users', {
+                axios.post('https://interlab4.azurewebsites.net/api/users', {
                     username: this.newEmail,
                     password: this.newPassword,
                     email: this.email,
@@ -130,7 +130,7 @@
                 })
                 console.log("creating user...", this.newEmail, this.newFirstName, this.newLastName, this.newPassword,
                     today.toString(), this.isValid)
-                axios.post('https://interlabwapostudios.azurewebsites.net/api/profiles',{
+                axios.post('https://interlab4.azurewebsites.net/api/profiles',{
                     role: this.newRole,
                     first_name: this.newName.split(" ")[0],
                     last_name: this.newName.split(" ")[1],

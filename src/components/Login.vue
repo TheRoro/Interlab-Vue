@@ -90,11 +90,11 @@
       validateUser: function () {
         //Search User in database
         axios.all([
-          axios.get('https://interlabwapostudios.azurewebsites.net/api/users'),
-          axios.get('https://interlabwapostudios.azurewebsites.net/api/profiles')
+          axios.get('https://interlab4.azurewebsites.net/api/users'),
+          axios.get('https://interlab4.azurewebsites.net/api/profiles')
         ])
         .then(responseArr =>{
-          var userId = 0;
+          this.userId = 0;
           this.users = responseArr[0].data;
           this.profiles = responseArr[1].data;
           //Validating user
@@ -104,7 +104,7 @@
                     responseArr[0].data[i].email === this.email &&
                     responseArr[0].data[i].password === this.password) {
               console.log("User Found");
-              userId = i + 1;
+              userId = responseArr[0].data[i].id;
               console.log("User id: ", userId);
               this.auth = true;
               break;
@@ -138,6 +138,7 @@
       },
     },
     data: () => ({
+      userId: 0,
       email:null,
       isValid:true,
       show1: false,
@@ -158,6 +159,7 @@
       }
     }),
   }
+  export let userId = 0;
 </script>
 
 <style scoped>
