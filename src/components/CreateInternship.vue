@@ -280,7 +280,7 @@
                                     <v-card-actions>
                                         <v-spacer></v-spacer>
                                         <v-flex justify-center>
-                                        <v-btn href="/companyDashboard"  color="primary" @click="dialog = false">Continue</v-btn>
+                                        <v-btn  color="primary" @click="reload()">Continue</v-btn>
                                         </v-flex>
                                     </v-card-actions>
                                 </v-card>
@@ -330,6 +330,10 @@
 
         ),
         methods: {
+            reload() {
+                this.dialog = false;
+                location.reload();
+            },
             next(Step) {
 
                 this.e6 = this.e6 + 1;
