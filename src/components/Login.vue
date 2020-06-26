@@ -40,10 +40,10 @@
           <div class="links">
             <v-row>
               <v-col cols="12" sm="6">
-                <a href="/registerCompany" class="reg_company">Register as a company</a>
+                <router-link to="/registerCompany">Register as a Company</router-link>
               </v-col>
               <v-col cols="12" sm="6">
-                <a href="/registerStudent" class="reg_student">Register as a Student</a>
+                <router-link to="/registerStudent">Register as a Student</router-link>
               </v-col>
             </v-row>
           </div>
