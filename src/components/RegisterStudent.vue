@@ -56,7 +56,7 @@
                     <div class="links">
                         <v-row>
                             <v-col cols="12" sm="6">
-                                <a href="/registerCompany" class="company">Are you a company?</a>
+                                <a @click=registerCompany() class="company">Are you a company?</a>
                             </v-col>
                             <v-col cols="12" sm="6">
                                 <a href="/" class="already">Already have an account?</a>
@@ -122,6 +122,9 @@
                     console.log(this.newEmail, this.newName, this.newPassword,
                         this.newPassword2, this.isValid)
                 }
+            },
+            registerCompany(){
+                router.push({path: `/registerCompany`})
             },
             createUser(){
                 let today = new Date().toString();
