@@ -101,7 +101,9 @@
         color: black !important;
     }
     .upper_box{
-        background-image: url("https://thumbs.dreamstime.com/b/blurred-blue-bright-gradient-blue-light-gradient-purple-background-violet-purple-gradient-soft-light-wallpaper-blurred-blue-125220733.jpg");
+
+        background: rgb(255,186,125);
+        background: linear-gradient(90deg, rgba(255,186,125,1) 0%, rgba(255,239,126,1) 100%);
         height: 90%;
         border-radius: 20px !important;
     }
