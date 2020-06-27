@@ -127,58 +127,57 @@
                 router.push({path: `/registerCompany`})
             },
             createUser(){
-                let today = new Date().toString();
                 this.newRole = "student";
                 //create user
                 axios.post('https://interlab4.azurewebsites.net/api/users', {
                     username: this.newEmail,
                     password: this.newPassword,
-                    email: this.email,
-                    date_created: today,
+                    email: this.newEmail,
+                    dateCreated: new Date(),
                 }).then((response) =>{
                     const data = response.data;
                     this.users.push(data);
                     console.log(response);
+                    axios.get('https://interlab4.azurewebsites.net/api/users')
+                        .then(response => {
+                            this.users = response.data;
+                            console.log('Source Users:');
+                            console.log(response.data);
+                            this.users = response.data;
+                            //Validating user
+                            for (let i = 0; i < response.data.length; i++) {
+                                if (response.data[i].email === this.newEmail) {
+                                    console.log("New User Found");
+                                    this.userId = response.data[i].id;
+                                    console.log("User id: ", userId);
+                                    break;
+                                }
+                            }
+                            axios.post('https://interlab4.azurewebsites.net/api/users/' + this.userId + '/profiles',{
+                                role: 'student',
+                                firstName: this.newFirstName,
+                                lastName: this.newLastName,
+                                field: '',
+                                phone: '',
+                                description: '',
+                                country: '',
+                                city: '',
+                            }).then((response) =>{
+                                const data = response.data;
+                                this.profiles.push(data);
+                                console.log(response);
+                            })
+                            console.log("creating profiles' user...", this.newRole, this.newFirstName, this.newPassword,
+                                this.newPassword2,  this.isValid, this.userId)
+                            router.push({path: `/studentDashboard`})
+                        })
+
                 })
                 console.log("creating user...", this.newEmail, this.newFirstName, this.newLastName, this.newPassword,
-                    today.toString(), this.isValid)
+                    this.isValid)
                 //get user
-                axios.get('https://interlab4.azurewebsites.net/api/users')
-                    .then(response => {
-                        this.users = response.data;
-                        console.log('Source Users:');
-                        console.log(response.data);
-                        this.userId = 0;
-                        this.users = response.data;
-                        //Validating user
-                        for (let i = 0; i < response.data.length; i++) {
-                            if (response.data[i].email === this.newEmail) {
-                                console.log("New User Found");
-                                this.userId = response.data[i].id;
-                                console.log("User id: ", userId);
-                                break;
-                            }
-                        }
-                    })
 
-                axios.post('https://interlab4.azurewebsites.net/api/profiles',{
-                    role: this.newRole,
-                    first_name: this.newFirstName,
-                    last_name: this.newLastName,
-                    field: '',
-                    phone: '',
-                    description: '',
-                    country: '',
-                    city: '',
-                    user_id: this.userId,
-                }).then((response) =>{
-                    const data = response.data;
-                    this.profiles.push(data);
-                    console.log(response);
-                })
-                console.log("creating profiles' user...", this.newRole, this.newFirstName, this.newPassword,
-                    this.newPassword2, today.toString(), this.isValid, this.userId)
-                router.push({path: `/studentDashboard`})
+
             }
         }
     }
