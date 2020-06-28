@@ -3,8 +3,9 @@
         <v-card-title class="justify-start">Edit Profile</v-card-title>
         <v-card v-if="showPersonal">
             <p>Personal Info</p>
+            <div class="Names">
             <v-row>
-                <v-col>
+                <v-col cols="12" sm="6">
                     <v-text-field
                             label="Name"
                             v-model="firstName"
@@ -12,7 +13,7 @@
                             required>
                     </v-text-field>
                 </v-col>
-                <v-col>
+                <v-col cols="12" sm="6">
                     <v-text-field
                             label="Last Name" hint="one of your parents last name"
                             v-model="lastName"
@@ -21,8 +22,10 @@
                     </v-text-field>
                 </v-col>
             </v-row>
+            </div>
+            <div  class="countries">
             <v-row>
-                <v-col>
+                <v-col cols="12" sm="6">
                     <v-autocomplete
                             ref="country"
                             v-model="country"
@@ -33,7 +36,7 @@
                             required
                     ></v-autocomplete>
                 </v-col>
-                <v-col>
+                <v-col cols="12" sm="6">
                     <v-text-field
                             label="City" hint="Where do you live?"
                             v-model="city"
@@ -42,6 +45,7 @@
                     </v-text-field>
                 </v-col>
             </v-row>
+            </div>
             <v-row>
                 <v-col cols="12" sm="3">
                     <v-text-field
@@ -167,6 +171,15 @@
     }
     .v-card {
         box-shadow: none;
+    }
+
+    @media only screen and (max-width: 600px) {
+        .Names{
+            font-size: 3.5vw;
+        }
+        .countries{
+            font-size: 3.5vw;
+        }
     }
 
 </style>
