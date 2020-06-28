@@ -103,7 +103,6 @@
 
 <script>
     import axios from 'axios'
-    import {userId} from "./Login";
     import router from "../router";
     export default {
         name: "RegisterCompany",
@@ -119,6 +118,8 @@
             users: [],
             profiles: [],
             userId: null,
+
+
         }),
         methods: {
             submit() {
@@ -154,7 +155,9 @@
                                 if (response.data[i].email === this.newEmail.toString()) {
                                     console.log("New User Found");
                                     this.userId = response.data[i].id;
-                                    console.log("User id: ", userId);
+                                    this.$store.state.userId = this.userId;
+                                    console.log(response.data[i].id);
+                                    console.log("Este es el global ", this.$store.state.userId);
                                     break;
                                 }
                             }
