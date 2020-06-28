@@ -91,23 +91,21 @@
     methods: {
       validateUser: function () {
         //Search User in database
-        axios.all([
-          axios.get('https://interlab4.azurewebsites.net/api/users'),
-          axios.get('https://interlab4.azurewebsites.net/api/profiles')
-        ])
-        .then(responseArr =>{
+        axios.get('https://interlab4.azurewebsites.net/api/users')
+        .then(response =>{
           this.userId = 0;
-          this.users = responseArr[0].data;
-          this.profiles = responseArr[1].data;
+          this.users = response.data;
           //Validating user
-          for (let i = 0; i < responseArr[0].data.length; i++) {
-            if (responseArr[0].data[i].username === this.email &&
-                    responseArr[0].data[i].password === this.password ||
-                    responseArr[0].data[i].email === this.email &&
-                    responseArr[0].data[i].password === this.password) {
+          for (let i = 0; i < response.data.length; i++) {
+            if (response.data[i].username === this.email &&
+                    response.data[i].password === this.password ||
+                    response.data[i].email === this.email &&
+                    response.data[i].password === this.password) {
               console.log("User Found");
-              userId = responseArr[0].data[i].id;
-              console.log("User id: ", userId);
+              this.userId = response.data[i].id;
+              console.log("User id: ", this.userId);
+              this.$store.commit('saveId', this.userId);
+              console.log("User id: ", this.$store.state.userId);
               this.auth = true;
               break;
             }
@@ -117,30 +115,30 @@
           }
           if(this.auth){
             //validating profile
-            for (let i = 0; i < responseArr[1].data.length; i++) {
-              console.log("userId", userId);
-              if (responseArr[1].data[i].id === userId) {
-                this.role = true;
-                console.log("Profile Found");
-                if (responseArr[1].data[i].role.toLowerCase() === 'student') {
-                  router.push({path: `/studentDashboard`})
-                } else if (responseArr[1].data[i].role.toLowerCase() === 'company') {
-                  router.push({path: `/companyDashboard`})
-                } else {
-                  alert("Invalid Role");
-                }
-                break;
+            axios.get('https://interlab4.azurewebsites.net/api/users/' + this.$store.state.userId + '/profiles')
+            .then(response2 =>{
+              this.userProfile = response2.data[0];
+              this.firstName = response2.data[0].firstName;
+              this.$store.commit('saveFirstName', this.firstName);
+              console.log("First Name", response2.data[0].firstName);
+              console.log(this.firstName);
+              if (response2.data[0].role.toLowerCase() === 'student') {
+                router.push({path: `/studentDashboard`})
+              } else if (response2.data[0].role.toLowerCase() === 'company') {
+                router.push({path: `/companyDashboard`})
+              } else {
+                alert("Invalid Role");
               }
-            }
-            if(!this.role){
-              alert("Could not find Role");
-            }
+            }).catch(error => {
+              console.log(error)
+            });
           }
         });
       },
     },
     data: () => ({
       userId: 0,
+      firstName: null,
       email:null,
       isValid:true,
       show1: false,
@@ -149,7 +147,7 @@
       password: '',
       ref: "/",
       users: [],
-      profiles: [],
+      userProfile: [],
       rules: {
         required: value => !!value || 'Required.',
         min: v => v.length >= 8 || 'Min 8 characters',
@@ -161,7 +159,6 @@
       }
     }),
   }
-  export let userId = 0;
 </script>
 
 <style scoped>
