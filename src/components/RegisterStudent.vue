@@ -149,6 +149,7 @@
                                 if (response.data[i].email === this.newEmail) {
                                     console.log("New User Found");
                                     this.userId = response.data[i].id;
+                                    this.$store.commit('saveId', this.userId);
                                     console.log("User id: ", userId);
                                     break;
                                 }
@@ -165,6 +166,9 @@
                             }).then((response) =>{
                                 const data = response.data;
                                 this.profiles.push(data);
+                                this.$store.commit('saveFirstName', this.newFirstName);
+                                console.log("Saved name is: ", this.$store.state.firstName);
+                                console.log("Saved Id: ", this.$store.state.userId);
                                 console.log(response);
                             })
                             console.log("creating profiles' user...", this.newRole, this.newFirstName, this.newPassword,

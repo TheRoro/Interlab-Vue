@@ -2,7 +2,7 @@
     <v-layout class="internship_body" id="style-1">
         <v-flex class="internship_container">
             <div>
-                <h1 class="welcome">Welcome: Student </h1>
+                <h1 class="welcome">Welcome: {{this.$store.state.firstName}}</h1>
             </div>
             <h1 class="results_title">Take a look to some of the companies currently hiring: </h1>
             <v-row>

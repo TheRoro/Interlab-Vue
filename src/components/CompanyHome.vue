@@ -2,7 +2,7 @@
     <v-layout class="internship_body" id="style-1">
         <v-flex class="internship_container">
             <div>
-                <h1 class="welcome">Welcome: Company </h1>
+                <h1 class="welcome">Welcome: {{this.$store.state.firstName}} </h1>
             </div>
             <h1 class="posting">Take a look to some of the companies currently posting: </h1>
             <v-row>
@@ -59,13 +59,15 @@
             dialog: false,
         }),
         created() {
+            this.saveUser();
         },
         methods: {
             selectButton(){
-
             },
             submit(){
-
+            },
+            saveUser(){
+                console.log(this.$store.state.userId);
             }
         }
     }
