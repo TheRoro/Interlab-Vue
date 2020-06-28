@@ -104,6 +104,7 @@
 <script>
     import axios from 'axios'
     import router from "../router";
+    import {userId} from "./Login";
     export default {
         name: "RegisterCompany",
         data: () => ({
@@ -155,24 +156,31 @@
                                 if (response.data[i].email === this.newEmail.toString()) {
                                     console.log("New User Found");
                                     this.userId = response.data[i].id;
-                                    this.$store.state.userId = this.userId;
-                                    console.log(response.data[i].id);
-                                    console.log("Este es el global ", this.$store.state.userId);
+                                    this.$store.commit('saveId', this.userId);
+                                    console.log("User id: ", userId);
                                     break;
                                 }
                             }
                             axios.post('https://interlab4.azurewebsites.net/api/users/' + this.userId + '/profiles',{
                                 role: 'company',
                                 firstName: this.newFirstName,
-                                lastName: this.newLastName
+                                lastName: this.newLastName,
+                                field: '',
+                                phone: '',
+                                description: '',
+                                country: '',
+                                city: '',
                             }).then((response) =>{
                                 const data = response.data;
                                 this.profiles.push(data);
+                                this.$store.commit('saveFirstName', this.newFirstName);
+                                console.log("Saved name is: ", this.$store.state.firstName);
+                                console.log("Saved Id: ", this.$store.state.userId);
                                 console.log(response);
-                                router.push({path: `/companyDashboard`});
                             })
                             console.log("creating profiles' user...", this.newRole, this.newFirstName, this.newPassword,
                                 this.newPassword2,  this.isValid)
+                            router.push({path: `/companyDashboard`});
                         })
                 })
                 console.log("creating user...", this.newEmail, this.newFirstName, this.newLastName, this.newPassword,
