@@ -180,7 +180,7 @@
                             })
                             console.log("creating profiles' user...", this.newRole, this.newFirstName, this.newPassword,
                                 this.newPassword2,  this.isValid)
-                            router.push({path: `/companyDashboard`});
+                            router.push({path: `/createCompany`});
                         })
                 })
                 console.log("creating user...", this.newEmail, this.newFirstName, this.newLastName, this.newPassword,
