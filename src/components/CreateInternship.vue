@@ -10,7 +10,7 @@
                             <v-row>
                                 <v-col cols="12" sm="3">
                                     <v-card-title id="subtitle" class="subtitle">
-                                        <v-icon color="black" size="30">search</v-icon>
+                                        <v-icon color="black" size="30">view_quilt</v-icon>
                                         Basic Info
                                     </v-card-title>
                                 </v-col>
@@ -26,7 +26,7 @@
                                     <v-text-field
                                             placeholder="InterLab S.A"
                                             counter="25"
-                                            v-model="name"
+                                            v-model="newName"
                                             :rules="[v=> !!v || 'Company Name is required']"
                                             required
                                     >
@@ -44,7 +44,7 @@
                                     <v-text-field
                                             placeholder="Software Engineer"
                                             counter="25"
-                                            v-model="title"
+                                            v-model="newTitle"
                                             :rules="[v=> !!v || 'Job Title is required']"
                                             required>
                                     </v-text-field>
@@ -60,8 +60,8 @@
                                 <v-col cols="12" sm="8">
                                     <v-autocomplete
                                             ref="country"
-                                            v-model="country"
-                                            :rules="[() => !!country || 'This field is required']"
+                                            v-model="newCountry"
+                                            :rules="[() => !!newCountry || 'This field is required']"
                                             :items="countries"
                                             label="Country"
                                             placeholder="Select..."
@@ -71,7 +71,8 @@
                             </v-row>
                             <v-row>
                                 <v-col cols="12" sm="3" align="right">
-                                    <a class="subtitle-field">Salary</a>
+                                    <p class="subtitle-field">Salary</p>
+                                    <p class="subtitle-field-mini">(Monthly)</p>
                                 </v-col>
                                 <v-col cols="12" sm="1" align="right">
                                     <div></div>
@@ -80,7 +81,7 @@
                                     <v-text-field
                                             prefix="$"
                                             hint="1200.00 $"
-                                            v-model="salary"
+                                            v-model="newSalary"
                                             :rules="[numberRule]"
                                             required>
                                     </v-text-field>
@@ -124,7 +125,7 @@
                                     <div></div>
                                 </v-col>
                                 <v-col cols="12" sm="8">
-                                    <v-textarea>
+                                    <v-textarea v-model="newDescription">
                                         <template v-slot:label>
                                             <div>
                                                 Main activities to perform during the job
@@ -172,7 +173,7 @@
                                     <v-autocomplete
                                             :items="fields"
                                             label="Field"
-                                            v-model="field"
+                                            v-model="newField"
                                             :rules="fieldRules"
                                             required
                                     ></v-autocomplete>
@@ -192,6 +193,7 @@
                                         </v-col>
                                         <v-col cols="12" sm="10" align="right">
                                             <v-select
+                                                    v-model="newSemester"
                                                     :items="semesters"
                                                     suffix="Semester"
                                                     required
@@ -235,7 +237,7 @@
                                 </v-col>
                                 <v-col cols="12" sm="8">
                                     <v-combobox
-                                            v-model="model"
+                                            v-model="newDocuments"
                                             :items="items"
                                             :search-input.sync="search"
                                             color=""
@@ -280,7 +282,7 @@
                                     <v-card-actions>
                                         <v-spacer></v-spacer>
                                         <v-flex justify-center>
-                                        <v-btn  color="primary" @click="reload()">Continue</v-btn>
+                                        <v-btn  color="primary" @click="submitInternship()">Continue</v-btn>
                                         </v-flex>
                                     </v-card-actions>
                                 </v-card>
@@ -289,29 +291,32 @@
                     </v-card-actions>
                 </v-card>
             </v-stepper-content>
-
-            <v-card v-if="showStep4"></v-card>
-            <v-card v-if="showStep5"></v-card>
         </v-stepper>
-
     </v-container>
 </template>
 
 <script>
+    import axios from "axios";
+
     export default {
         name: "CreateInternship",
         data: () => ({
                 e6: 1,
                 items: ['Curriculum Vitae', 'Birth Certificate'],
-                model: ['Curriculum Vitae'],
                 search: null,
-                name: null,
-                title: null,
-                location: null,
-                salary: null,
-                country: null,
-                field: null,
+                newName: null,
+                newTitle: null,
+                newCountry: null,
+                newSalary: null,
+                newDescription: null,
+                newLocation: null,
+                newField: null,
+                newSemester: null,
+                newDocuments: null,
+                newInternship: null,
+                internshipId: null,
                 isValid: true,
+                dialog: null,
                 showStep1: true,
                 showStep2: false,
                 showStep3: false,
@@ -321,7 +326,6 @@
                 fields: ['Tech', 'Health', 'Transport', 'Accountancy', 'Human Resources', 'Graphic Design', 'Business', 'Call Center'],
                 semesters: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14'],
                 numberRule: v => {
-                    if (!v.trim()) return true;
                     if (!isNaN(parseFloat(v)) && v >= 0 && v <= 99999999) return true;
                     return 'It has to be a number';
                 },
@@ -330,7 +334,25 @@
 
         ),
         methods: {
-            reload() {
+            submitInternship(){
+                axios.post('https://interlab4.azurewebsites.net/api/companies/1/internships', {
+                    state: 'Available',
+                    description: this.newDescription,
+                    salary: parseInt(this.newSalary),
+                    location: this.newCountry,
+                    requiredDocuments: 'CV',
+                    jobTitle: this.newTitle,
+                    publicationDate: new Date(),
+                    startingDate: new Date(),
+                    finishingDate: new Date(),
+
+                }).then((response) => {
+                    this.newInternship = response.data;
+                    this.internshipId = this.newInternship.id;
+                    console.log(this.internshipId);
+                    console.log(this.newInternship);
+                    console.log(response.data);
+                });
                 this.dialog = false;
                 location.reload();
             },
@@ -340,21 +362,17 @@
                 if (Step === 'Step1') {
                     this.showStep1 = false;
                     this.showStep2 = true;
+                    console.log(this.newName, this.newTitle, this.newCountry, this.newSalary);
                 }
                 if (Step === 'Step2') {
                     this.showStep2 = false;
                     this.showStep3 = true;
+                    console.log(this.newDescription);
                 }
                 if (Step === 'Step3') {
                     this.showStep3 = false;
                     this.showStep4 = true;
-                }
-                if (Step === 'Step4') {
-                    this.showStep4 = false;
-                    this.showStep5 = true;
-                }
-                if (Step === 'Step5') {
-                    this.showStep5 = false;
+                    console.log(this.newField, this.newSemester);
                 }
             }
         }
@@ -393,5 +411,9 @@
         font-size: 22px;
         color: black;
         justify-content: center;
+    }
+    .subtitle-field-mini{
+        margin-top: -1.8vw;
+        font-size: 1vw;
     }
 </style>
