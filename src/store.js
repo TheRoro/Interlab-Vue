@@ -8,6 +8,8 @@ export const store = new Vuex.Store({
         userId : null,
         firstName: null,
         companyId: null,
+        internshipId: null,
+        internships: [],
     },
     mutations: {
         saveId(state, id){
@@ -18,6 +20,15 @@ export const store = new Vuex.Store({
         },
         saveCompanyId(state, id){
             this.state.companyId = id;
+        },
+        saveInternshipId(state, id){
+            this.state.internshipId = id;
+        },
+        saveInternships(state, internships){
+            this.state.internships = internships;
+        },
+        addInternships(state, internship){
+            this.state.internships.push(internship);
         }
     }
 });

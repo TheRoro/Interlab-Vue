@@ -26,7 +26,7 @@
                                                     </v-row>
                                                 </v-col>
                                                 <v-col cols="12" sm="4">
-                                                    <v-btn class="apply_btn" dark v-bind="attrs" v-on="on" @click="selectButton">Apply</v-btn>
+                                                    <v-btn class="apply_btn" dark v-bind="attrs" v-on="on" @click="selectButton(internship.id)">Apply</v-btn>
                                                 </v-col>
                                             </v-row>
                                         </div>
@@ -59,7 +59,7 @@
                                                     </v-row>
                                                 </v-col>
                                                 <v-col cols="12" sm="4">
-                                                    <v-btn class="apply_btn" dark v-bind="attrs" v-on="on" @click="selectButton">Apply</v-btn>
+                                                    <v-btn class="apply_btn" dark v-bind="attrs" v-on="on" @click="selectButton(internship.id)">Apply</v-btn>
                                                 </v-col>
                                             </v-row>
                                         </div>
@@ -91,6 +91,7 @@
 </template>
 
 <script>
+    import axios from 'axios'
     export default {
         name: "FindInternship",
         props: {
@@ -100,8 +101,15 @@
             dialog: false,
         }),
         methods: {
-            selectButton(){
-
+            selectButton(id){
+                this.$store.commit('saveInternshipId', id);
+                axios.post('https://interlab4.azurewebsites.net/api/users/'+this.$store.state.userId+'/internships/'+this.$store.state.internshipId)
+                .then(response => {
+                   console.log('Aplicado',response.data);
+                   axios.get('https://interlab4.azurewebsites.net/api/users/'+this.$store.state.userId+'/internships').then(response => {
+                       this.$store.commit('saveInternships', response.data);
+                   })
+                });
             },
             submit(){
                 location.reload();
