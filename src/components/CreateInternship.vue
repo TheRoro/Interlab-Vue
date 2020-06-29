@@ -252,7 +252,8 @@
                                             <v-list-item>
                                                 <v-list-item-content>
                                                     <v-list-item-title>
-                                                        No results matching "<strong>{{ search }}</strong>". Press <kbd>enter</kbd> to create a new one
+                                                        No results matching "<strong>{{ search }}</strong>". Press <kbd>enter</kbd>
+                                                        to create a new one
                                                     </v-list-item-title>
                                                 </v-list-item-content>
                                             </v-list-item>
@@ -277,12 +278,14 @@
                                     </v-btn>
                                 </template>
                                 <v-card>
-                                    <v-card-title align="center" class="justify-center">Internship created successfully</v-card-title>
+                                    <v-card-title align="center" class="justify-center">Internship created
+                                        successfully
+                                    </v-card-title>
                                     <v-card-text align="center">Press continue to return to the dashboard</v-card-text>
                                     <v-card-actions>
                                         <v-spacer></v-spacer>
                                         <v-flex justify-center>
-                                        <v-btn  color="primary" @click="submitInternship()">Continue</v-btn>
+                                            <v-btn color="primary" @click="submitInternship()">Continue</v-btn>
                                         </v-flex>
                                     </v-card-actions>
                                 </v-card>
@@ -334,8 +337,8 @@
 
         ),
         methods: {
-            submitInternship(){
-                axios.post('https://interlab4.azurewebsites.net/api/companies/1/internships', {
+            submitInternship() {
+                axios.post('https://interlab4.azurewebsites.net/api/companies/' + this.$store.state.companyId + '/internships', {
                     state: 'Available',
                     description: this.newDescription,
                     salary: parseInt(this.newSalary),
@@ -352,9 +355,24 @@
                     console.log(this.internshipId);
                     console.log(this.newInternship);
                     console.log(response.data);
+                    axios.get('https://interlab4.azurewebsites.net/api/companies/' + this.$store.state.companyId + '/internships')
+                        .then(response2 => {
+                            this.$store.commit('saveInternships', response2.data);
+                            this.showStep1 = true;
+                            this.e6 = 1;
+                            this.search = null;
+                            this.newName = null;
+                            this.newTitle = null;
+                            this.newCountry = null;
+                            this.newSalary = null;
+                            this.newDescription = null;
+                            this.newLocation = null;
+                            this.newField = null;
+                            this.newSemester = null;
+                            this.newDocuments = null;
+                        })
                 });
                 this.dialog = false;
-                location.reload();
             },
             next(Step) {
 
@@ -374,7 +392,7 @@
                     this.showStep4 = true;
                     console.log(this.newField, this.newSemester);
                 }
-            }
+            },
         }
     }
 </script>
@@ -385,9 +403,10 @@
         align-content: center;
         position: center;
     }
-    .justify-center{
-        font-size: 1.5em!important;
-        font-weight: bolder!important;
+
+    .justify-center {
+        font-size: 1.5em !important;
+        font-weight: bolder !important;
     }
 
     .next {
@@ -412,7 +431,8 @@
         color: black;
         justify-content: center;
     }
-    .subtitle-field-mini{
+
+    .subtitle-field-mini {
         margin-top: -1.8vw;
         font-size: 1vw;
     }
