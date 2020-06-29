@@ -44,7 +44,7 @@
                     <CompanyHome :companies="companies"></CompanyHome>
                 </v-tab-item>
                 <v-tab-item>
-                    <MainContentInternship :internships="internships"></MainContentInternship>
+                    <MainContentInternship :internships="this.$store.state.internships"></MainContentInternship>
                 </v-tab-item>
                 <v-tab-item>
                     <CreateInternship></CreateInternship>
@@ -78,7 +78,6 @@
         },
         data: () => ({
             drawer: true,
-            internships: [],
             companies: [],
             img: 'require(\'./assets/logo.jpg\')',
             selected: '',
@@ -99,9 +98,10 @@
         },
         methods: {
             setCompany() {
-                axios.get('https://interlab4.azurewebsites.net/api/companies/1/internships')
+                console.log('company id de myinternship',this.$store.state.companyId)
+                axios.get('https://interlab4.azurewebsites.net/api/companies/'+ this.$store.state.companyId +'/internships')
                     .then(response => {
-                        this.internships = response.data;
+                        this.$store.commit('saveInternships', response.data);
                         console.log('Source Internships:');
                         console.log(response.data);
                     })

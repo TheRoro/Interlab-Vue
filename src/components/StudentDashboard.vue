@@ -18,6 +18,10 @@
                         <v-icon left size="25">search</v-icon>
                         <v-list-item-title class="hidden">Find Internship</v-list-item-title>
                     </v-tab>
+                    <v-tab :class="title2" @click="setSelected('MyRequests')">
+                        <v-icon left size="25">view_list</v-icon>
+                        <v-list-item-title class="hidden">My Requests</v-list-item-title>
+                    </v-tab>
                     <v-tab :class="title4" @click="setSelected('Edit_Profile')">
                         <v-icon left size="25">account_circle</v-icon>
                         <v-list-item-title class="hidden">Edit Profile</v-list-item-title>
@@ -39,6 +43,9 @@
                     <FindInternship :internships="internships"></FindInternship>
                 </v-tab-item>
                 <v-tab-item>
+                    <MyRequests></MyRequests>
+                </v-tab-item>
+                <v-tab-item>
                     <ProfileContent></ProfileContent>
                 </v-tab-item>
             </v-tabs-items>
@@ -51,11 +58,12 @@
     import StudentHome from "./StudentHome";
     import FindInternship from "./FindInternship";
     import ProfileContent from "./ProfileContent";
+    import MyRequests from "./MyRequests";
 
 
     export default {
         name: 'StudentDashboard',
-        components: {ProfileContent, FindInternship, StudentHome},
+        components: {MyRequests, ProfileContent, FindInternship, StudentHome},
         props: {
 
         },
@@ -113,6 +121,12 @@
                     this.title1 = "title";
                     this.title2 = "title";
                     this.title3 = "title-selected";
+                    this.title4 = "title";
+                }
+                if (info === 'MyRequests') {
+                    this.title1 = "title";
+                    this.title2 = "title-selected";
+                    this.title3 = "title";
                     this.title4 = "title";
                 }
                 if (info === 'Edit_Profile') {
