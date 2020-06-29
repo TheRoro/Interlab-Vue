@@ -10,5 +10,6 @@ export default new Router({
         { path: "/registerStudent", name: "registerStudent", component: () => import("./components/RegisterStudent")},
         { path: "/companyDashboard", name: "companyDashboard", component: () => import("./components/CompanyDashboard")},
         { path: "/studentDashboard", name: "studentDashboard", component: () => import("./components/StudentDashboard")},
+        { path: "/createCompany", name: "createCompany", component: () => import("./components/CreateCompany")},
     ]
 });
