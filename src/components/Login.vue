@@ -125,7 +125,11 @@
               if (response2.data[0].role.toLowerCase() === 'student') {
                 router.push({path: `/studentDashboard`})
               } else if (response2.data[0].role.toLowerCase() === 'company') {
-                router.push({path: `/companyDashboard`})
+                axios.get('https://interlab4.azurewebsites.net/api/users/'+ this.$store.state.userId +'/companies')
+                        .then(response3 => {
+                          this.$store.commit('saveCompanyId', response3.data[0].id);
+                          router.push({path: `/companyDashboard`})
+                        });
               } else {
                 alert("Invalid Role");
               }
