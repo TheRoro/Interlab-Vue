@@ -225,14 +225,6 @@
         color: #282a3f !important;
         font-size: 1.2vw;
     }
-    .login_btn{
-        margin-top: 1vw;
-        background-color: #2c305b !important;
-        width: 80%;
-        border-radius: 20px;
-        margin-left: 3vw;
-        height: 100%;
-    }
     .logo{
         margin-top: -1vw;
         margin-left: 1vw;
