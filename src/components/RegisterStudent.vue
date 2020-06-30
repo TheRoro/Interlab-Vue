@@ -20,11 +20,13 @@
                 </v-card-text>
                 <v-card-text class="register">
                     <div class="form">
-                        <v-text-field class="text-field"  label="E-mail" v-model="newEmail"
-                                      :rules="[v => !!v || 'E-mail is required']"
+                        <v-text-field class="text-field"  label="E-mail"
+                                      v-model="newEmail" :rules="[v => !!v || 'E-mail is required']"
                                       required>
 
                         </v-text-field>
+                    </div>
+                    <div class="form">
                         <v-row>
                             <v-col>
                                 <v-text-field class="text-field first_name"  label="First Name" v-model="newFirstName"
@@ -39,14 +41,15 @@
                                 </v-text-field>
                             </v-col>
                         </v-row>
-
-
+                    </div>
+                    <div class="form">
                         <v-text-field class="text-field"  label="Password" v-model="newPassword" :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
                                       :rules="[v => !!v || 'A password is required'] "
                                       :type="show1 ? 'text' : 'password'" required @click:append="show1 = !show1" hint="At least 8 characters">
 
                         </v-text-field>
-
+                    </div>
+                    <div class="form">
                         <v-text-field class="text-field" label="Confirm Password" v-model="newPassword2" :append-icon="show2 ? 'mdi-eye' : 'mdi-eye-off'"
                                       :rules="[v => !!v || 'Passwords must be the same']"
                                       :type="show2 ? 'text' : 'password'" required @click:append="show2 = !show2">
@@ -190,20 +193,63 @@
 </script>
 
 <style scoped>
+    .right_text{
+        margin-top: 6vw;
+        margin-left: 7vw;
+        color: white;
+        font-size: 3.5vw;
+    }
+    .form{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 80%;
+        margin-left: 3vw;
+    }
     .left_banner{
-        font-size: 3em;
+        font-size: 3vw;
     }
     .right_banner{
-        font-size: 8em;
+        font-size: 11vw;
         color: white;
         background-color: #447dd4;
     }
-    .right_text{
-        margin-top: 2em;
-        margin-left: 1.5em;
-        color: white;
-        font-size: 0.3em;
+    .links{
+        margin-top: 1.5vw;
+        margin-left: 4vw;
     }
+    .register{
+        text-decoration:none !important;
+        font-size: 1.2vw;
+    }
+    .logo{
+        margin-top: -1vw;
+        margin-left: 1vw;
+        width: 40%;
+        height: 40%;
+    }
+    .about{
+        margin-bottom: 0;
+    }
+    .about_title{
+        font-size: 1.2vw;
+        font-weight: bold;
+    }
+    .about_text{
+        font-size: 1vw;
+        font-weight: normal;
+        text-align: justify;
+    }
+    .about_btn{
+        margin-top: 2vw;
+        border-radius: 20px;
+        margin-left: 1vw;
+        width: 80%;
+        height: 50%;
+        font-size: 1vw;
+    }.left_banner{
+         font-size: 3vw;
+     }
     .register{
         margin-top: -2.5em;
     }
@@ -213,30 +259,23 @@
         width: 20%;
         height: 20%;
     }
-    .text-field{
-        width: 80%;
-        padding-top: 1.3em;
-        padding-left: 4em;
-    }
     .user{
-        margin-left: 10em;
-    }
-    .student{
-        margin-left: 1em;
+        margin-left: 11vw;
         font-weight: bold;
-        color: #447dd4 !important;
     }
     .register_btn{
-        margin-top: 1em;
+        margin-top: 1vw;
         background-color: #447dd4 !important;
-        width: 75%;
+        width: 80%;
         border-radius: 20px;
-        margin-left: 3em;
+        margin-left: 3vw;
+        height: 100%;
         color: white !important;
     }
-    .links{
-        margin-top: 1.5em;
-        margin-left: 4em;
+    .student{
+        margin-left: 2vw;
+        text-decoration:none !important;
+        color: #447dd4 !important;
     }
     .company{
         text-decoration:none !important;
@@ -246,29 +285,51 @@
         text-decoration:none !important;
         color: black !important;
     }
-    .about{
-        /*margin-top: 4em;*/
-        margin-bottom: 0;
-    }
-    .about_title{
-        font-size: 1.1em;
-        font-weight: bold;
-    }
-    .about_text{
-        font-size: 1em;
-        font-weight: normal;
-    }
-    .about_btn{
-        margin-top: 2.5em;
-        border-radius: 20px;
-        margin-left: 1em;
-    }
     .first_name{
-        width: 90%;
+        width: 100%;
     }
     .last_name{
-        margin-left: -4.5em;
-        width: 90%;
+        width: 100%;
+    }
+    @media only screen and (max-width: 600px) {
+        .about_title{
+            font-size: 4vw;
+        }
+        .about_text{
+            font-size: 3vw;
+        }
+        .about_btn{
+            width: 55%;
+            height: 50%;
+            font-size: 3vw;
+            margin-left: 20%;
+        }
+        .register{
+            font-size: 3.5vw;
+        }
+        .logo{
+            margin-left: 38%;
+            width: 20%;
+            height: 20%;
+        }
+        .right_banner{
+            display: none;
+        }
+        .text-field{
+            display: flex;
+            justify-content: center;
+        }
+        .form{
+            width: 100%;
+            margin-left: 0 !important;
+        }
+        .user{
+            margin-left: 38%;
+        }
+        .register_btn{
+            border-radius: 20px;
+            margin-left: 7vw;
+        }
     }
 </style>
 
