@@ -1,7 +1,7 @@
 <template>
     <v-container class="profileContent">
         <v-card-title class="justify-start">Edit Profile</v-card-title>
-        <v-card v-if="showPersonal">
+        <v-card v-if="showPersonal" class="profile_card">
             <p>Personal Info</p>
             <div class="Names">
                 <v-row>
@@ -57,7 +57,7 @@
                 </v-col>
             </v-row>
         </v-card>
-        <v-card v-if="showAcademic">
+        <v-card v-if="showAcademic" class="profile_card">
             <p>Academic Info</p>
             <v-row>
                 <v-col cols="12" sm="5">
@@ -209,7 +209,10 @@
     p{
         color: black;
     }
-
+    .profile_card{
+        padding-left: 1vw;
+        padding-top: 1vw;
+    }
     .saveButton{
         background-color: #4b7bff;
 
@@ -230,6 +233,10 @@
         }
         .countries{
             font-size: 3.5vw;
+        }
+        .profile_card{
+            padding-left: 2vw;
+            padding-top: 2vw;
         }
     }
 

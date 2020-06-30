@@ -175,4 +175,24 @@
         margin-left: 1em;
         margin-top: 0em;
     }
+    @media screen and (max-width: 600px){
+        .apply_btn{
+            margin-top: -10vw;
+            margin-left: 4vw!important;
+            height: 7vw !important;
+        }
+        .upper_box{
+            height: 45vw !important;
+        }
+    }
+    @media screen and (max-width: 400px){
+        .apply_btn{
+            margin-top: -10vw;
+            margin-left: 6vw!important;
+            height: 10vw !important;
+        }
+        .upper_box{
+            height: 70vw !important;
+        }
+    }
 </style>
