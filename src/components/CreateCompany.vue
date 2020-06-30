@@ -146,7 +146,7 @@
                                         :disabled="!isValid"
                                         @click="createCompany()"
                                 >
-                                    Create Internship
+                                    Create Company
                                 </v-btn>
                             </template>
                             <v-card>
