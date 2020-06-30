@@ -34,7 +34,7 @@
                 </template>
             </v-navigation-drawer>
         </v-card>
-        <v-main>
+        <v-main class="main_content">
             <v-tabs-items v-model="tab">
                 <v-tab-item>
                     <StudentHome :companies="companies"></StudentHome>
@@ -149,7 +149,7 @@
     .logo{
         max-width:60%;
         height:45%;
-        margin-left: 2.5em;
+        margin-left: 3.5vw;
     }
     .title {
         background-color: white;
@@ -173,6 +173,9 @@
     .hidden {
         text-transform:none !important;
     }
+    .main_content{
+        padding: 0 0 0 200px !important;
+    }
 
     @media screen and (max-width: 780px){
         .hidden {
@@ -180,6 +183,13 @@
         }
         .size {
             width: 100px !important;
+        }
+        .logo{
+            max-width:100%;
+            margin-left: 0 !important;
+        }
+        .main_content{
+            padding: 0 0 0 100px !important;
         }
     }
 

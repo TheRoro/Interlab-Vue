@@ -1,10 +1,10 @@
 <template>
     <v-container class="profileContent">
         <v-card-title class="justify-start">Editar Perfil</v-card-title>
-        <v-card v-if="showPersonal">
+        <v-card v-if="showPersonal" class="profile_card">
             <p>Información Personal</p>
             <v-row>
-                <v-col>
+                <v-col  cols="12" sm="6">
                     <v-text-field
                             label="Nombre"
                             v-model="firstName"
@@ -12,7 +12,7 @@
                             required>
                     </v-text-field>
                 </v-col>
-                <v-col>
+                <v-col cols="12" sm="6">
                     <v-text-field
                             label="Apellido" hint="use special characters such as: #$%!"
                             v-model="lastName"
@@ -22,7 +22,7 @@
                 </v-col>
             </v-row>
             <v-row>
-                <v-col>
+                <v-col cols="12" sm="6">
                     <v-autocomplete
                             ref="country"
                             v-model="country"
@@ -33,7 +33,7 @@
                             required
                     ></v-autocomplete>
                 </v-col>
-                <v-col>
+                <v-col cols="12" sm="6">
                     <v-text-field
                             label="Ciudad" hint="use special characters such as: #$%!"
                             v-model="city"
@@ -53,10 +53,10 @@
                 </v-col>
             </v-row>
         </v-card>
-        <v-card v-if="showAcademic">
+        <v-card v-if="showAcademic" class="profile_card">
             <p>Información Laboral</p>
             <v-row>
-                <v-col cols="22" sm="8">
+                <v-col cols="12" sm="12">
                     <v-data-table
                             :headers="headers"
                             :items="desserts"
@@ -139,7 +139,7 @@
             </v-row>
         </v-card>
         <v-card-actions>
-            <v-btn href="/MainContent">Regresar</v-btn>
+            <v-btn v-if="showAcademic" @click="back()">Regresar</v-btn>
             <v-col class="text-right">
                 <v-btn :class="saveButton" @click="saveClick" bottom center class="white--text" color="#4b7bff">Guardar Cambios</v-btn>
             </v-col>
@@ -226,11 +226,12 @@
             },
 
             close () {
-                this.dialog = false
-                this.$nextTick(() => {
-                    this.editedItem = Object.assign({}, this.defaultItem)
-                    this.editedIndex = -1
-                })
+                this.showPersonal = true;
+                this.showAcademic = false;
+            },
+            back(){
+                this.showPersonal = true;
+                this.showAcademic = false;
             },
 
             save () {
@@ -253,7 +254,10 @@
     p{
         color: black;
     }
-
+    .profile_card{
+        padding-left: 1vw;
+        padding-top: 1vw;
+    }
     .saveButton{
         background-color: #4b7bff;
 
@@ -268,8 +272,16 @@
         box-shadow: none;
     }
 
-    .elevation-1{
-        width: 1000px;
-        transform: translateX(150px);
+    @media only screen and (max-width: 600px) {
+        .Names{
+            font-size: 3.5vw;
+        }
+        .countries{
+            font-size: 3.5vw;
+        }
+        .profile_card{
+            padding-left: 2vw;
+            padding-top: 2vw;
+        }
     }
 </style>
