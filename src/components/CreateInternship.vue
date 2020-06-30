@@ -4,15 +4,15 @@
             <v-stepper-step :complete="e6 > 1" step="1"> Basic Info</v-stepper-step>
             <v-stepper-content step="1">
                 <v-card v-if="showStep1" class="Step" width="100em" height="40em">
-                    <v-card-title class="title1">Create Internship</v-card-title>
+                    <p class="title1">Create Internship</p>
                     <v-card-text>
                         <v-form v-model="isValid">
                             <v-row>
                                 <v-col cols="12" sm="3">
-                                    <v-card-title id="subtitle" class="subtitle">
+                                    <p id="subtitle" class="subtitle">
                                         <v-icon color="black" size="30">view_quilt</v-icon>
                                         Basic Info
-                                    </v-card-title>
+                                    </p>
                                 </v-col>
                             </v-row>
                             <v-row>
@@ -104,16 +104,16 @@
             <v-stepper-step :complete="e6 > 2" step="2">Offer Details</v-stepper-step>
             <v-stepper-content step="2">
                 <v-card v-if="showStep2" class="Step" width="100em" height="40em">
-                    <v-card-title class="title1">Create Internship</v-card-title>
+                    <p class="title1">Create Internship</p>
                     <v-card-text>
                         <v-form v-model="isValid">
                             <v-row>
                                 <v-col cols="12" sm="3">
                                     <div>
-                                        <v-card-title class="subtitle">
+                                        <p class="subtitle">
                                             <v-icon color="black" size="30">apps</v-icon>
                                             Offer Details
-                                        </v-card-title>
+                                        </p>
                                     </div>
                                 </v-col>
                             </v-row>
@@ -149,16 +149,16 @@
             <v-stepper-step :complete="e6 > 3" step="3">Profile Requirements</v-stepper-step>
             <v-stepper-content step="3">
                 <v-card v-if="showStep3" class="Step" width="100em" height="40em">
-                    <v-card-title class="title1">Create Internship</v-card-title>
+                    <p class="title1">Create Internship</p>
                     <v-card-text>
                         <v-form v-model="isValid">
                             <v-row>
                                 <v-col cols="12" sm="3">
                                     <div>
-                                        <v-card-title class="subtitle">
+                                        <p class="subtitle">
                                             <v-icon color="black" size="30">check_box</v-icon>
                                             Profile Requirements
-                                        </v-card-title>
+                                        </p>
                                     </div>
                                 </v-col>
                             </v-row>
@@ -217,15 +217,15 @@
             <v-stepper-step :complete="e6 > 4" step="4"> Documents</v-stepper-step>
             <v-stepper-content step="4">
                 <v-card v-if="showStep4" class="Step" width="100em" height="40em">
-                    <v-card-title class="title1">Create Internship</v-card-title>
+                    <p class="title1">Create Internship</p>
                     <v-card-text>
                         <v-form v-model="isValid">
                             <v-row>
                                 <v-col cols="12" sm="3">
-                                    <v-card-title class="subtitle">
+                                    <p class="subtitle">
                                         <v-icon color="black" size="30">article</v-icon>
                                         Documents
-                                    </v-card-title>
+                                    </p>
                                 </v-col>
                             </v-row>
                             <v-row>
@@ -273,6 +273,7 @@
                                             v-bind="attrs"
                                             v-on="on"
                                             :disabled="!isValid"
+                                            class="btnCreate"
                                     >
                                         Create Internship
                                     </v-btn>
@@ -435,5 +436,26 @@
     .subtitle-field-mini {
         margin-top: -1.8vw;
         font-size: 1vw;
+    }
+    @media screen and (max-width: 780px){
+        .title1 {
+            font-size: 6vw;
+        }
+        .subtitle-field{
+            margin-left: -5vw;
+        }
+        .Step{
+            height: 300vw !important;
+        }
+        .subtitle-field-mini {
+            font-size: 4vw;
+        }
+        .subtitle{
+            font-size: 5vw;
+        }
+        .btnCreate{
+            font-size: 3vw;
+            margin-left: -5vw;
+        }
     }
 </style>

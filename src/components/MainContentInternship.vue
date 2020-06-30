@@ -7,10 +7,10 @@
                     <div class="upper_box">
                         <h1 class="headline">{{ internship.jobTitle }}</h1>
                         <v-row>
-                            <v-col cols="12" sm="1">
+                            <v-col>
                                 <v-icon class="location_icon">location_on</v-icon>
                             </v-col>
-                            <v-col cols="12" sm="11">
+                            <v-col>
                                 <v-card-text class="sub-headline">{{ internship.location }}</v-card-text>
                             </v-col>
                         </v-row>
@@ -36,8 +36,8 @@
 
 <style scoped>
     .internship_container{
-        margin-left: 1em;
-        margin-right: 1em;
+        margin-left: 1vw;
+        margin-right: 1vw;
     }
     .headline{
         margin-left: 1em;
@@ -47,7 +47,7 @@
         font-size: 1.3vw!important;
     }
     .sub-headline{
-        margin-left: 0.5em;
+        margin-left: -30vw;
         margin-top: -1em;
         font-family: 'Khula', sans-serif !important;
         font-weight: 300;
@@ -68,7 +68,6 @@
     }
 
     .internship_card{
-        margin-bottom: 1em;
         border-radius: 20px !important;
         margin-bottom: 3vw;
     }
@@ -80,5 +79,24 @@
         margin-left: 1em;
         color: white;
         font-weight: bold;
+    }
+    @media screen and (max-width: 780px){
+        .internship_card{
+            height: 70vw !important;
+        }
+        .upper_box{
+            height: 25vw !important;
+        }
+        .headline{
+            font-size: 3vw!important;
+        }
+        .sub-headline{
+            font-size: 3vw!important;
+            margin-left: -10vw;
+            padding-right: 2vw;
+        }
+        .about{
+            font-size: 3vw!important;
+        }
     }
 </style>

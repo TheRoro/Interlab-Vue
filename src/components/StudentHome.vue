@@ -21,7 +21,7 @@
                                 </v-row>
                             </div>
                             <v-card-text class="about"> Sector: {{ company.sector }}</v-card-text>
-                            <v-card-text class="about"> About the job: {{ company.description }}</v-card-text>
+                            <v-card-text class="about"> About the Company: {{ company.description }}</v-card-text>
                         </v-card>
                     </div>
                 </v-col>
@@ -40,7 +40,7 @@
                                 </v-row>
                             </div>
                             <v-card-text class="about"> Sector: {{ company.sector }}</v-card-text>
-                            <v-card-text class="about"> About the job: {{ company.description }}</v-card-text>
+                            <v-card-text class="about"> About the Company: {{ company.description }}</v-card-text>
                         </v-card>
                     </div>
                 </v-col>
@@ -122,6 +122,15 @@
     }
     .location_icon{
         margin-left: 1em;
+    }
+    @media screen and (max-width: 780px){
+        .results_title{
+            margin-top: 0.5em;
+            margin-bottom: 0.5em;
+            font-family: 'Khula', sans-serif !important;
+            font-weight: 500;
+            font-size: 7vw;
+        }
     }
 </style>
 
