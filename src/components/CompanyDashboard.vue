@@ -1,5 +1,5 @@
 <template>
-    <v-app id="style-1" >
+    <v-app id="style-1">
         <v-card>
             <v-navigation-drawer permanent fixed app clipped-left width="200px" class="size">
                 <v-toolbar flat color="white" dark>
@@ -26,10 +26,6 @@
                         <v-icon left size="25">account_circle</v-icon>
                         <v-list-item-title class="hidden">Edit Profile</v-list-item-title>
                     </v-tab>
-                    <v-tab :class="title5" @click="setSelected('History_Intern')">
-                        <v-icon left size="25">how_to_reg</v-icon>
-                        <v-list-item-title class="hidden">History Intern</v-list-item-title>
-                    </v-tab>
                 </v-tabs>
                 <template v-slot:append>
                     <div class="pa-2">
@@ -38,7 +34,7 @@
                 </template>
             </v-navigation-drawer>
         </v-card>
-        <v-main>
+        <v-main class="main_content">
             <v-tabs-items v-model="tab">
                 <v-tab-item>
                     <CompanyHome :companies="companies"></CompanyHome>
@@ -52,9 +48,6 @@
                 <v-tab-item>
                     <ProfileCompany></ProfileCompany>
                 </v-tab-item>
-                <v-tab-item>
-                    <QualifyIntern></QualifyIntern>
-                </v-tab-item>
             </v-tabs-items>
         </v-main>
     </v-app>
@@ -67,12 +60,11 @@
     import MainContentInternship from "./MainContentInternship";
     import CreateInternship from "./CreateInternship";
     import ProfileCompany from "./ProfileCompany";
-    import QualifyIntern from "./QualifyIntern";
     //import Testing from "./Testing";
 
     export default {
         name: 'CompanyDashboard',
-        components: {QualifyIntern,  ProfileCompany, CreateInternship, MainContentInternship, CompanyHome},
+        components: {  ProfileCompany, CreateInternship, MainContentInternship, CompanyHome},
         props: {
 
         },
@@ -169,7 +161,7 @@
     .logo{
         max-width:60%;
         height:45%;
-        margin-left: 2.5em;
+        margin-left: 3.5vw;
     }
     .title {
         background-color: white;
@@ -192,6 +184,9 @@
     .hidden {
         text-transform:none !important;
     }
+    .main_content{
+        padding: 0 0 0 200px !important;
+    }
 
     @media screen and (max-width: 780px){
         .hidden {
@@ -199,6 +194,13 @@
         }
         .size {
             width: 100px !important;
+        }
+        .logo{
+            max-width:100%;
+            margin-left: 0 !important;
+        }
+        .main_content{
+            padding: 0 0 0 100px !important;
         }
     }
 
