@@ -41,15 +41,15 @@
                         </v-row>
 
 
-                        <v-text-field class="text-field"  label="Password" v-model="newPassword"
-                                      :rules="[v => !!v || 'A password is required']"
-                                      type="password" required>
+                        <v-text-field class="text-field"  label="Password" v-model="newPassword" :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
+                                      :rules="[v => !!v || 'A password is required'] "
+                                      :type="show1 ? 'text' : 'password'" required @click:append="show1 = !show1" hint="At least 8 characters">
 
                         </v-text-field>
 
-                        <v-text-field class="text-field" label="Confirm Password" v-model="newPassword2"
+                        <v-text-field class="text-field" label="Confirm Password" v-model="newPassword2" :append-icon="show2 ? 'mdi-eye' : 'mdi-eye-off'"
                                       :rules="[v => !!v || 'Passwords must be the same']"
-                                      type="password" required>
+                                      :type="show2 ? 'text' : 'password'" required @click:append="show2 = !show2">
 
                         </v-text-field>
                     </div>
@@ -115,6 +115,8 @@
             users: [],
             profiles: [],
             userId : null,
+            show1: false,
+            show2: false,
         }),
         methods: {
             submit() {
