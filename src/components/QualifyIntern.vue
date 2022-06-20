@@ -10,7 +10,7 @@
                 show-select
                 class="elevation-1"
         >
-            <template v-slot:item.actions>
+            <template v-slot:[`item.actions`]>
                 <div class="text-center">
                     <v-rating></v-rating>
                 </div>

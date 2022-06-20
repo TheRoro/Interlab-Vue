@@ -34,7 +34,7 @@
                             </v-col>
                             <v-col cols="12" sm="8">
                                 <v-textarea v-model="description">
-                                    <template v-slot:label counter="300">
+                                    <template v-slot:label>
                                         <div>
                                             Description you want to show about your company
                                         </div>
@@ -169,7 +169,7 @@
 </template>
 
 <script>
-    import axios from "axios";
+    import axios from "../api";
     import router from "../router";
     export default {
         methods: {
@@ -182,7 +182,7 @@
                 console.log(this.address);
                 console.log(this.country);
                 console.log(this.city);
-                axios.post('https://interlab4.azurewebsites.net/api/companies', {
+                axios.post('/api/me/company', {
                     name: this.name,
                     description: this.description,
                     sector: this.field,
@@ -193,8 +193,6 @@
                     city: this.city
                 }).then(response => {
                     this.$store.commit('saveCompanyId', response.data.id);
-                    console.log(this.$store.state.companyId);
-                    axios.post('https://interlab4.azurewebsites.net/api/users/'+ this.$store.state.userId +'/companies/'+ this.$store.state.companyId);
                 })
             },
             goDashboard() {

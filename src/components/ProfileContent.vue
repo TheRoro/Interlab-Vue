@@ -108,7 +108,7 @@
 </template>
 
 <script>
-    import axios from "axios";
+    import axios from "../api";
     export default {
         name: "ProfileContent",
         props: {
@@ -141,35 +141,24 @@
         },
         methods:{
             initializerProfile(){
-                axios.get('https://interlab4.azurewebsites.net/api/users/' + this.$store.state.userId + '/profiles')
+                axios.get('/api/me/profile')
                     .then(response => {
-                        this.profiles = response.data;
-                        console.log('Source Profiles:');
-                        console.log(response.data);
-                        this.firstName = response.data[0].firstName;
-                        this.lastName = response.data[0].lastName ;
-                        this.university = response.data[0].university;
-                        this.phone = response.data[0].phone;
-                        this.country = response.data[0].country;
-                        this.city = response.data[0].city;
-                        this.degree = response.data[0].degree;
-                        this.field = response.data[0].field;
-                        this.semester = response.data[0].semester.toString();
-                        console.log("Saved name is: ", this.firstName);
-                        console.log("Saved lastName is: ", this.lastName);
-                        console.log("Saved phone is: ", this.phone);
-                        console.log("Saved country is: ", this.country);
-                        console.log("Saved city is: ", this.city);
-                        console.log("Saved field is: ", this.field);
-                        console.log("Saved university is: ", this.university);
-                        console.log("Saved degree is: ", this.degree);
-                        console.log("Saved semester is: ", this.semester);
+                        const profile = response.data;
+                        this.firstName = profile.firstName;
+                        this.lastName = profile.lastName;
+                        this.university = profile.university;
+                        this.phone = profile.phone;
+                        this.country = profile.country;
+                        this.city = profile.city;
+                        this.degree = profile.degree;
+                        this.field = profile.field;
+                        this.semester = profile.semester.toString();
                     })
             },
             saveClick(){
                 this.showAcademic = false;
                 // Put
-                axios.put('https://interlab4.azurewebsites.net/api/users/' +this.$store.state.userId + '/profiles', {
+                axios.put('/api/me/profile', {
                     firstName: this.firstName,
                     lastName: this.lastName,
                     phone: this.phone,
@@ -179,12 +168,7 @@
                     university: this.university,
                     degree: this.degree,
                     semester: parseInt(this.semester),
-                }).then(response2 =>{
-                    const data = response2.data;
-                    this.profiles.push(data);
-                    console.log(response2);
-                    console.log("updating profiles' user...", this.firstName, this.lastName, this.phone,
-                        this.country,  this.city, this.field, this.university, this.degree, this.semester);
+                }).then(() =>{
                     alert("Update Profile Successfully");
                     this.showPersonal=true;
                 })
@@ -241,4 +225,3 @@
     }
 
 </style>
-

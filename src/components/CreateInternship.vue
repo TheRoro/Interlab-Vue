@@ -300,7 +300,7 @@
 </template>
 
 <script>
-    import axios from "axios";
+    import axios from "../api";
 
     export default {
         name: "CreateInternship",
@@ -339,7 +339,7 @@
         ),
         methods: {
             submitInternship() {
-                axios.post('https://interlab4.azurewebsites.net/api/companies/' + this.$store.state.companyId + '/internships', {
+                axios.post('/api/me/company/internships', {
                     state: 'Available',
                     description: this.newDescription,
                     salary: parseInt(this.newSalary),
@@ -356,7 +356,7 @@
                     console.log(this.internshipId);
                     console.log(this.newInternship);
                     console.log(response.data);
-                    axios.get('https://interlab4.azurewebsites.net/api/companies/' + this.$store.state.companyId + '/internships')
+                    axios.get('/api/me/company/internships')
                         .then(response2 => {
                             this.$store.commit('saveInternships', response2.data);
                             this.showStep1 = true;

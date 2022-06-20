@@ -91,7 +91,7 @@
 </template>
 
 <script>
-    import axios from 'axios'
+    import axios from '../api'
     export default {
         name: "FindInternship",
         props: {
@@ -103,10 +103,10 @@
         methods: {
             selectButton(id){
                 this.$store.commit('saveInternshipId', id);
-                axios.post('https://interlab4.azurewebsites.net/api/users/'+this.$store.state.userId+'/internships/'+this.$store.state.internshipId)
+                axios.post('/api/me/internships/' + this.$store.state.internshipId)
                 .then(response => {
                    console.log('Aplicado',response.data);
-                   axios.get('https://interlab4.azurewebsites.net/api/users/'+this.$store.state.userId+'/internships').then(response => {
+                   axios.get('/api/me/internships').then(response => {
                        this.$store.commit('saveInternships', response.data);
                    })
                 });

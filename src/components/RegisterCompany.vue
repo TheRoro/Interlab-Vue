@@ -84,7 +84,7 @@
                             </div>
                         </v-col>
                         <v-col cols="12" sm="4">
-                            <v-btn href="https://8rb.github.io/Interlab-Landing-Page/" target="_blank" class="about_btn">About Us</v-btn>
+                            <v-btn href="https://8rb.github.io/Interlab-Landing-Page/" target="_blank" rel="noopener noreferrer" class="about_btn">About Us</v-btn>
                         </v-col>
                     </v-row>
                 </v-card-text>
@@ -102,9 +102,8 @@
 </template>
 
 <script>
-    import axios from 'axios'
+    import axios from '../api'
     import router from "../router";
-    import {userId} from "./Login";
     export default {
         name: "RegisterCompany",
         data: () => ({
@@ -133,62 +132,31 @@
             registerStudent(){
                 router.push({path: `/registerStudent`})
             },
-            createUser(){
-                axios.post('https://interlab4.azurewebsites.net/api/users', {
+            async createUser(){
+                try {
+                    const response = await axios.post('/api/auth/register', {
                     username: this.newEmail,
                     password: this.newPassword,
                     email: this.newEmail,
-                    dateCreated: new Date(),
-
-                }).then((response) =>{
-                    const data = response.data;
-                    this.users.push(data);
-                    console.log(response);
-                    axios.get('https://interlab4.azurewebsites.net/api/users')
-                        .then(response => {
-                            this.users = response.data;
-                            console.log('Source Users:');
-                            console.log(response.data);
-                            this.users = response.data;
-                            //Validating user
-                            for (let i = 0; i < response.data.length; i++) {
-                                console.log(response.data[i].email);
-                                console.log(response.data[i].id);
-                                if (response.data[i].email === this.newEmail.toString()) {
-                                    console.log("New User Found");
-                                    this.userId = response.data[i].id;
-                                    this.$store.commit('saveId', this.userId);
-                                    console.log("User id: ", userId);
-                                    break;
-                                }
-                            }
-                            axios.post('https://interlab4.azurewebsites.net/api/users/' + this.userId + '/profiles',{
-                                role: 'company',
-                                firstName: this.newFirstName,
-                                lastName: this.newLastName,
-                                field: '',
-                                phone: '',
-                                description: '',
-                                country: '',
-                                city: '',
-                            }).then((response) =>{
-                                const data = response.data;
-                                this.profiles.push(data);
-                                this.$store.commit('saveFirstName', this.newFirstName);
-                                console.log("Saved name is: ", this.$store.state.firstName);
-                                console.log("Saved Id: ", this.$store.state.userId);
-                                console.log(response);
-                            })
-                            console.log("creating profiles' user...", this.newRole, this.newFirstName, this.newPassword,
-                                this.newPassword2,  this.isValid)
-                            router.push({path: `/createCompany`});
-                        })
-                })
-                console.log("creating user...", this.newEmail, this.newFirstName, this.newLastName, this.newPassword,
-                     this.isValid)
-                //get user
-
-
+                        role: "company",
+                        firstName: this.newFirstName,
+                        lastName: this.newLastName,
+                    });
+                    const user = response.data.user;
+                    if (!user || !user.id || user.role.toLowerCase() !== "company") {
+                        throw new Error("The registration response is invalid.");
+                    }
+                    this.$store.commit("saveSession", user);
+                    await router.push({name: "createCompany"});
+                } catch (error) {
+                    this.$store.commit("clearSession");
+                    alert(error.response && error.response.status === 409
+                        ? "An account already exists for this email."
+                        : "Unable to register. Please try again later.");
+                } finally {
+                    this.newPassword = "";
+                    this.newPassword2 = "";
+                }
             }
         }
     }

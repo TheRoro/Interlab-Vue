@@ -29,7 +29,7 @@
                 </v-tabs>
                 <template v-slot:append>
                     <div class="pa-2">
-                        <v-btn href="/" block>Logout</v-btn>
+                        <v-btn @click="logout" block>Logout</v-btn>
                     </div>
                 </template>
             </v-navigation-drawer>
@@ -55,7 +55,7 @@
 
 
 <script>
-    import axios from 'axios'
+    import axios from '../api'
     import CompanyHome from "./CompanyHome";
     import MainContentInternship from "./MainContentInternship";
     import CreateInternship from "./CreateInternship";
@@ -89,9 +89,16 @@
             this.allCompanies();
         },
         methods: {
+            async logout() {
+                try {
+                    await axios.post('/api/auth/logout');
+                } finally {
+                    this.$store.commit('clearSession');
+                    await this.$router.push({name: 'login'});
+                }
+            },
             setCompany() {
-                console.log('company id de myinternship',this.$store.state.companyId)
-                axios.get('https://interlab4.azurewebsites.net/api/companies/'+ this.$store.state.companyId +'/internships')
+                axios.get('/api/me/company/internships')
                     .then(response => {
                         this.$store.commit('saveInternships', response.data);
                         console.log('Source Internships:');

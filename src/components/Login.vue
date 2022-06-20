@@ -50,7 +50,7 @@
             </v-row>
           </div>
           <v-card-text class="btn">
-            <v-btn @click="validateUser" class="login_btn" color="primary" :disabled="!isValid" >Log In</v-btn>
+            <v-btn @click="validateUser" class="login_btn" color="primary" :disabled="!isValid || loading" :loading="loading">Log In</v-btn>
           </v-card-text>
         </v-card-text>
 
@@ -63,7 +63,7 @@
               </div>
             </v-col>
             <v-col cols="12" sm="4">
-          <v-btn href="https://8rb.github.io/Interlab-Landing-Page/" target="_blank" class="about_btn">About Us</v-btn>
+          <v-btn href="https://8rb.github.io/Interlab-Landing-Page/" target="_blank" rel="noopener noreferrer" class="about_btn">About Us</v-btn>
               </v-col>
           </v-row>
         </v-card-text>
@@ -83,65 +83,43 @@
 
 
 <script>
-  import axios from "axios";
+  import axios from "../api";
   import router from "../router";
 
   export default {
-    name: "Login",
+    name: "UserLogin",
     methods: {
-      validateUser: function () {
-        //Search User in database
-        axios.get('https://interlab4.azurewebsites.net/api/users')
-        .then(response =>{
-          this.userId = 0;
-          this.users = response.data;
-          //Validating user
-          for (let i = 0; i < response.data.length; i++) {
-            if (response.data[i].username === this.email &&
-                    response.data[i].password === this.password ||
-                    response.data[i].email === this.email &&
-                    response.data[i].password === this.password) {
-              console.log("User Found");
-              this.userId = response.data[i].id;
-              console.log("User id: ", this.userId);
-              this.$store.commit('saveId', this.userId);
-              console.log("User id: ", this.$store.state.userId);
-              this.auth = true;
-              break;
-            }
+      async validateUser() {
+        this.loading = true;
+        try {
+          const response = await axios.post("/api/auth/login", {
+            login: this.email,
+            password: this.password,
+          });
+          const user = response.data.user;
+
+          if (!user || !user.id || !user.firstName || !["student", "company"].includes(user.role && user.role.toLowerCase())) {
+            throw new Error("The authentication response is invalid.");
           }
-          if (!this.auth) {
+
+          this.$store.commit("saveSession", user);
+          await router.push({name: user.role.toLowerCase() === "student" ? "studentDashboard" : "companyDashboard"});
+        } catch (error) {
+          this.$store.commit("clearSession");
+          if (error.response && (error.response.status === 401 || error.response.status === 403)) {
             alert("Wrong username or password");
+          } else {
+            alert("Unable to log in. Please try again later.");
           }
-          if(this.auth){
-            //validating profile
-            axios.get('https://interlab4.azurewebsites.net/api/users/' + this.$store.state.userId + '/profiles')
-            .then(response2 =>{
-              this.userProfile = response2.data[0];
-              this.firstName = response2.data[0].firstName;
-              this.$store.commit('saveFirstName', this.firstName);
-              console.log("First Name", response2.data[0].firstName);
-              console.log(this.firstName);
-              if (response2.data[0].role.toLowerCase() === 'student') {
-                router.push({path: `/studentDashboard`})
-              } else if (response2.data[0].role.toLowerCase() === 'company') {
-                axios.get('https://interlab4.azurewebsites.net/api/users/'+ this.$store.state.userId +'/companies')
-                        .then(response3 => {
-                          this.$store.commit('saveCompanyId', response3.data[0].id);
-                          router.push({path: `/companyDashboard`})
-                        });
-              } else {
-                alert("Invalid Role");
-              }
-            }).catch(error => {
-              console.log(error)
-            });
-          }
-        });
+        } finally {
+          this.password = "";
+          this.loading = false;
+        }
       },
     },
     data: () => ({
       userId: 0,
+      loading: false,
       firstName: null,
       email:null,
       isValid:true,

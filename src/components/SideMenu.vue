@@ -1,5 +1,5 @@
 <template>
-    <v-navigation-drawer v-model="drawer" width="15%" permanent fixed app clipped-left class="elevation-2" id="style-1">
+    <v-navigation-drawer :value="drawer" width="15%" permanent fixed app clipped-left class="elevation-2" id="style-1">
         <v-list dense class="pt-3 white--text">
             <v-list-item @click=selectButton(dashboard) :class="dashboardState">
                 <v-list-item-icon>

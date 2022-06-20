@@ -8,7 +8,7 @@
 </template>
 
 <script>
-    import axios from 'axios'
+    import axios from '../api'
     export default {
         name: "MyRequests",
         data: () => ({
@@ -26,7 +26,7 @@
         methods: {
             getInternships() {
                 console.log("Ya entre amigo 2");
-                axios.get('https://interlab4.azurewebsites.net/api/users/'+this.$store.state.userId+'/internships')
+                axios.get('/api/me/internships')
                 .then(response => {
                     this.$store.commit('saveInternships', response.data);
                     console.log("Esta es", response.data);
