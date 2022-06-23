@@ -43,16 +43,16 @@
                         </v-row>
                     </div>
                     <div class="form">
-                        <v-text-field class="text-field"  label="Password" v-model="newPassword" :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
+                        <v-text-field class="text-field"  label="Password" v-model="newPassword" :append-inner-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
                                       :rules="[v => !!v || 'A password is required'] "
-                                      :type="show1 ? 'text' : 'password'" required @click:append="show1 = !show1" hint="At least 8 characters">
+                                      :type="show1 ? 'text' : 'password'" required @click:append-inner="show1 = !show1" hint="At least 8 characters">
 
                         </v-text-field>
                     </div>
                     <div class="form">
-                        <v-text-field class="text-field" label="Confirm Password" v-model="newPassword2" :append-icon="show2 ? 'mdi-eye' : 'mdi-eye-off'"
+                        <v-text-field class="text-field" label="Confirm Password" v-model="newPassword2" :append-inner-icon="show2 ? 'mdi-eye' : 'mdi-eye-off'"
                                       :rules="[v => !!v || 'Passwords must be the same']"
-                                      :type="show2 ? 'text' : 'password'" required @click:append="show2 = !show2">
+                                      :type="show2 ? 'text' : 'password'" required @click:append-inner="show2 = !show2">
 
                         </v-text-field>
                     </div>

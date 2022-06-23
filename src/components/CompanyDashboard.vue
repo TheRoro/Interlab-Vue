@@ -1,29 +1,29 @@
 <template>
     <v-app id="style-1">
         <v-card>
-            <v-navigation-drawer permanent fixed app clipped-left width="200px" class="size">
-                <v-toolbar flat color="white" dark>
+            <v-navigation-drawer permanent width="200" class="size">
+                <v-toolbar flat color="white">
                     <div>
                         <a href="/">
-                            <img class="logo" :src="require('../assets/interlab2.png')" alt=""/>
+                            <img class="logo" :src="logo" alt="InterLab"/>
                         </a>
                     </div>
                 </v-toolbar>
-                <v-tabs vertical v-model="tab" class="title1">
+                <v-tabs direction="vertical" v-model="tab" class="title1">
                     <v-tab :class="title1" @click="setSelected('Dashboard')">
-                        <v-icon left size="25">dashboard</v-icon>
+                        <v-icon start size="25">mdi-view-dashboard</v-icon>
                         <v-list-item-title class="hidden">Dashboard</v-list-item-title>
                     </v-tab>
                     <v-tab :class="title2" @click="setSelected('Internships')">
-                        <v-icon left size="25">business_center</v-icon>
+                        <v-icon start size="25">mdi-briefcase</v-icon>
                         <v-list-item-title class="hidden">My Internships</v-list-item-title>
                     </v-tab>
                     <v-tab :class="title3" @click="setSelected('CreateInternship')">
-                        <v-icon left size="25">add</v-icon>
+                        <v-icon start size="25">mdi-plus</v-icon>
                         <v-list-item-title class="hidden">Create Internship</v-list-item-title>
                     </v-tab>
                     <v-tab :class="title4" @click="setSelected('Edit_Profile')">
-                        <v-icon left size="25">account_circle</v-icon>
+                        <v-icon start size="25">mdi-account-circle</v-icon>
                         <v-list-item-title class="hidden">Edit Profile</v-list-item-title>
                     </v-tab>
                 </v-tabs>
@@ -35,20 +35,20 @@
             </v-navigation-drawer>
         </v-card>
         <v-main class="main_content">
-            <v-tabs-items v-model="tab">
-                <v-tab-item>
+            <v-window v-model="tab">
+                <v-window-item>
                     <CompanyHome :companies="companies"></CompanyHome>
-                </v-tab-item>
-                <v-tab-item>
-                    <MainContentInternship :internships="this.$store.state.internships"></MainContentInternship>
-                </v-tab-item>
-                <v-tab-item>
+                </v-window-item>
+                <v-window-item>
+                    <MainContentInternship :internships="$store.state.internships"></MainContentInternship>
+                </v-window-item>
+                <v-window-item>
                     <CreateInternship></CreateInternship>
-                </v-tab-item>
-                <v-tab-item>
+                </v-window-item>
+                <v-window-item>
                     <ProfileCompany></ProfileCompany>
-                </v-tab-item>
-            </v-tabs-items>
+                </v-window-item>
+            </v-window>
         </v-main>
     </v-app>
 </template>
@@ -56,10 +56,11 @@
 
 <script>
     import axios from '../api'
-    import CompanyHome from "./CompanyHome";
-    import MainContentInternship from "./MainContentInternship";
-    import CreateInternship from "./CreateInternship";
-    import ProfileCompany from "./ProfileCompany";
+    import CompanyHome from "./CompanyHome.vue";
+    import MainContentInternship from "./MainContentInternship.vue";
+    import CreateInternship from "./CreateInternship.vue";
+    import ProfileCompany from "./ProfileCompany.vue";
+    import logo from "../assets/interlab2.png";
     //import Testing from "./Testing";
 
     export default {
@@ -71,7 +72,7 @@
         data: () => ({
             drawer: true,
             companies: [],
-            img: 'require(\'./assets/logo.jpg\')',
+            logo,
             selected: '',
             title1: 'title',
             title2: 'title',
@@ -80,7 +81,7 @@
             title5: 'title',
             title6: 'title',
             errors: [],
-            tab: null,
+            tab: 0,
             isHidden: true,
             users: []
         }),

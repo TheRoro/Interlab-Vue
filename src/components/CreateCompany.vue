@@ -1,6 +1,6 @@
 <template>
     <v-app>
-        <v-content>
+        <v-main>
             <v-card width="100%" height="100%">
                 <v-card-title class="title1">Create Company</v-card-title>
                 <v-card-text>
@@ -8,7 +8,7 @@
                         <v-row>
                             <v-col cols="12" sm="3">
                                 <v-card-title id="subtitle" class="subtitle">
-                                    <v-icon color="black" size="30">search</v-icon>
+                                    <v-icon color="black" size="30">mdi-magnify</v-icon>
                                     Basic Info
                                 </v-card-title>
                             </v-col>
@@ -137,12 +137,10 @@
                 <v-card-actions>
                     <v-col class="text-right">
                         <v-dialog v-model="dialog" persistent max-width="30em">
-                            <template v-slot:activator="{ on, attrs }">
+                            <template v-slot:activator="{ props }">
                                 <v-btn
                                         color="primary"
-                                        dark
-                                        v-bind="attrs"
-                                        v-on="on"
+                                        v-bind="props"
                                         :disabled="!isValid"
                                         @click="createCompany()"
                                 >
@@ -154,9 +152,9 @@
                                 <v-card-text align="center">Press continue to go to the dashboard</v-card-text>
                                 <v-card-actions>
                                     <v-spacer></v-spacer>
-                                    <v-flex justify-center>
+                                    <div class="text-center">
                                         <v-btn  color="primary" @click="goDashboard()">Continue</v-btn>
-                                    </v-flex>
+                                    </div>
                                 </v-card-actions>
                             </v-card>
                         </v-dialog>
@@ -164,7 +162,7 @@
                 </v-card-actions>
 
             </v-card>
-        </v-content>
+        </v-main>
     </v-app>
 </template>
 

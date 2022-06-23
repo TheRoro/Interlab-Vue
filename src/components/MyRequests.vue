@@ -13,10 +13,10 @@
         name: "MyRequests",
         data: () => ({
             headers: [
-                {text: 'Job Title', align: 'start', sortable: false, value: 'jobTitle', },
-                { text: 'Location', value: 'location' },
-                { text: 'Salary', value: 'salary' },
-                { text: 'Date', value: 'startingDate' },
+                {title: 'Job Title', align: 'start', sortable: false, key: 'jobTitle' },
+                { title: 'Location', key: 'location' },
+                { title: 'Salary', key: 'salary' },
+                { title: 'Date', key: 'startingDate' },
             ],
         }),
         created() {

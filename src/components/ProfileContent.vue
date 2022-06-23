@@ -100,8 +100,8 @@
         <v-card-actions>
             <v-btn v-if="showAcademic"  @click="backClick" >Back</v-btn>
             <v-col class="text-right">
-                <v-btn v-if="showPersonal" :class="saveButton" @click="nextClick" bottom center class="white--text" color="#4b7bff">Next</v-btn>
-                <v-btn v-if="showAcademic" :class="saveButton" @click="saveClick" bottom center class="white--text" color="#4b7bff">Save Changes</v-btn>
+                <v-btn v-if="showPersonal" :class="saveButton" @click="nextClick" class="text-white" color="#4b7bff">Next</v-btn>
+                <v-btn v-if="showAcademic" :class="saveButton" @click="saveClick" class="text-white" color="#4b7bff">Save Changes</v-btn>
             </v-col>
         </v-card-actions>
     </v-container>

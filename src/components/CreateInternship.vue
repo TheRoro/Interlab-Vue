@@ -1,8 +1,8 @@
 <template>
     <v-container>
-        <v-stepper vertical v-model="e6">
-            <v-stepper-step :complete="e6 > 1" step="1"> Basic Info</v-stepper-step>
-            <v-stepper-content step="1">
+        <div>
+            <h2 v-if="showStep1">Basic Info</h2>
+            <div v-if="showStep1">
                 <v-card v-if="showStep1" class="Step" width="100em" height="40em">
                     <p class="title1">Create Internship</p>
                     <v-card-text>
@@ -10,7 +10,7 @@
                             <v-row>
                                 <v-col cols="12" sm="3">
                                     <p id="subtitle" class="subtitle">
-                                        <v-icon color="black" size="30">view_quilt</v-icon>
+                                        <v-icon color="black" size="30">mdi-view-quilt</v-icon>
                                         Basic Info
                                     </p>
                                 </v-col>
@@ -91,7 +91,7 @@
                     </v-card-text>
                     <v-card-actions>
                         <v-col class="text-right">
-                            <v-btn :disabled="!isValid" @click="next('Step1')" bottom center class="white--text"
+                            <v-btn :disabled="!isValid" @click="next('Step1')" class="text-white"
                                    color="#4b7bff"
                             >
                                 next
@@ -99,10 +99,10 @@
                         </v-col>
                     </v-card-actions>
                 </v-card>
-            </v-stepper-content>
+            </div>
 
-            <v-stepper-step :complete="e6 > 2" step="2">Offer Details</v-stepper-step>
-            <v-stepper-content step="2">
+            <h2 v-if="showStep2">Offer Details</h2>
+            <div v-if="showStep2">
                 <v-card v-if="showStep2" class="Step" width="100em" height="40em">
                     <p class="title1">Create Internship</p>
                     <v-card-text>
@@ -111,7 +111,7 @@
                                 <v-col cols="12" sm="3">
                                     <div>
                                         <p class="subtitle">
-                                            <v-icon color="black" size="30">apps</v-icon>
+                                            <v-icon color="black" size="30">mdi-apps</v-icon>
                                             Offer Details
                                         </p>
                                     </div>
@@ -138,16 +138,16 @@
                     </v-card-text>
                     <v-card-actions>
                         <v-col class="text-right">
-                            <v-btn :disabled="!isValid" bottom center class="white--text" color="#4b7bff"
+                            <v-btn :disabled="!isValid" class="text-white" color="#4b7bff"
                                    @click="next('Step2')">next
                             </v-btn>
                         </v-col>
                     </v-card-actions>
                 </v-card>
-            </v-stepper-content>
+            </div>
 
-            <v-stepper-step :complete="e6 > 3" step="3">Profile Requirements</v-stepper-step>
-            <v-stepper-content step="3">
+            <h2 v-if="showStep3">Profile Requirements</h2>
+            <div v-if="showStep3">
                 <v-card v-if="showStep3" class="Step" width="100em" height="40em">
                     <p class="title1">Create Internship</p>
                     <v-card-text>
@@ -156,7 +156,7 @@
                                 <v-col cols="12" sm="3">
                                     <div>
                                         <p class="subtitle">
-                                            <v-icon color="black" size="30">check_box</v-icon>
+                                            <v-icon color="black" size="30">mdi-checkbox-marked</v-icon>
                                             Profile Requirements
                                         </p>
                                     </div>
@@ -206,16 +206,16 @@
                     </v-card-text>
                     <v-card-actions>
                         <v-col class="text-right">
-                            <v-btn :disabled="!isValid" bottom center class="white&#45;&#45;text" color="#4b7bff"
+                            <v-btn :disabled="!isValid" class="text-white" color="#4b7bff"
                                    @click="next('Step3')">next
                             </v-btn>
                         </v-col>
                     </v-card-actions>
                 </v-card>
-            </v-stepper-content>
+            </div>
 
-            <v-stepper-step :complete="e6 > 4" step="4"> Documents</v-stepper-step>
-            <v-stepper-content step="4">
+            <h2 v-if="showStep4">Documents</h2>
+            <div v-if="showStep4">
                 <v-card v-if="showStep4" class="Step" width="100em" height="40em">
                     <p class="title1">Create Internship</p>
                     <v-card-text>
@@ -223,7 +223,7 @@
                             <v-row>
                                 <v-col cols="12" sm="3">
                                     <p class="subtitle">
-                                        <v-icon color="black" size="30">article</v-icon>
+                                        <v-icon color="black" size="30">mdi-file-document</v-icon>
                                         Documents
                                     </p>
                                 </v-col>
@@ -239,23 +239,21 @@
                                     <v-combobox
                                             v-model="newDocuments"
                                             :items="items"
-                                            :search-input.sync="search"
+                                            v-model:search="search"
                                             color=""
                                             hide-selected
                                             hint="Type to add a new document"
                                             label="Add some tags"
                                             multiple
                                             persistent-hint
-                                            small-chips
+                                            chips
                                     >
                                         <template v-slot:no-data>
                                             <v-list-item>
-                                                <v-list-item-content>
-                                                    <v-list-item-title>
-                                                        No results matching "<strong>{{ search }}</strong>". Press <kbd>enter</kbd>
-                                                        to create a new one
-                                                    </v-list-item-title>
-                                                </v-list-item-content>
+                                                <v-list-item-title>
+                                                    No results matching "<strong>{{ search }}</strong>". Press <kbd>enter</kbd>
+                                                    to create a new one
+                                                </v-list-item-title>
                                             </v-list-item>
                                         </template>
                                     </v-combobox>
@@ -266,12 +264,10 @@
                     <v-card-actions>
                         <v-col class="text-right">
                             <v-dialog v-model="dialog" persistent max-width="30em">
-                                <template v-slot:activator="{ on, attrs }">
+                                <template v-slot:activator="{ props }">
                                     <v-btn
                                             color="primary"
-                                            dark
-                                            v-bind="attrs"
-                                            v-on="on"
+                                            v-bind="props"
                                             :disabled="!isValid"
                                             class="btnCreate"
                                     >
@@ -285,17 +281,17 @@
                                     <v-card-text align="center">Press continue to return to the dashboard</v-card-text>
                                     <v-card-actions>
                                         <v-spacer></v-spacer>
-                                        <v-flex justify-center>
+                                        <div class="text-center">
                                             <v-btn color="primary" @click="submitInternship()">Continue</v-btn>
-                                        </v-flex>
+                                        </div>
                                     </v-card-actions>
                                 </v-card>
                             </v-dialog>
                         </v-col>
                     </v-card-actions>
                 </v-card>
-            </v-stepper-content>
-        </v-stepper>
+            </div>
+        </div>
     </v-container>
 </template>
 

@@ -4,6 +4,21 @@ Interlab is a LinkedIn clone, developed in Vue.js in the Front-End and .Net Core
 
 ## Web Application developed in Vue
 
+The frontend uses Vue 3, Vuetify 3, and Vite.
+
+```powershell
+npm install
+npm run serve
+```
+
+Create a local `.env.local` file to override the API endpoint:
+
+```text
+VITE_API_BASE_URL=https://example.com
+```
+
+Use `npm run build` for a production build and `npm run lint` to lint the source.
+
 ## Authentication API requirements
 
 The frontend expects the API to authenticate with an `HttpOnly`, `Secure`,

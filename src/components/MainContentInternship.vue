@@ -1,6 +1,6 @@
 <template>
-    <v-layout class="internship_body" id="style-1">
-        <v-flex class="internship_container">
+    <div class="internship_body" id="style-1">
+        <div class="internship_container">
 
             <div v-for="internship in internships" :key="internship.id">
                 <v-card class="internship_card">
@@ -8,7 +8,7 @@
                         <h1 class="headline">{{ internship.jobTitle }}</h1>
                         <v-row>
                             <v-col>
-                                <v-icon class="location_icon">location_on</v-icon>
+                                <v-icon class="location_icon">mdi-map-marker</v-icon>
                             </v-col>
                             <v-col>
                                 <v-card-text class="sub-headline">{{ internship.location }}</v-card-text>
@@ -21,8 +21,8 @@
             </div>
 
 
-        </v-flex>
-    </v-layout>
+        </div>
+    </div>
 </template>
 
 <script>

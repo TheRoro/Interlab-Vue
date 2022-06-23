@@ -1,55 +1,30 @@
 <template>
     <v-navigation-drawer :value="drawer" width="15%" permanent fixed app clipped-left class="elevation-2" id="style-1">
-        <v-list dense class="pt-3 white--text">
-            <v-list-item @click=selectButton(dashboard) :class="dashboardState">
-                <v-list-item-icon>
-                    <v-icon>dashboard</v-icon>
-                </v-list-item-icon>
-                <v-list-item-content>
-                    <v-list-item-title class="sideMenuTitle">Dashboard</v-list-item-title>
-                </v-list-item-content>
+        <v-list density="compact" class="pt-3 text-white">
+            <v-list-item prepend-icon="mdi-view-dashboard" @click=selectButton(dashboard) :class="dashboardState">
+                <v-list-item-title class="sideMenuTitle">Dashboard</v-list-item-title>
             </v-list-item>
-            <v-list-item @click=selectButton(profile) :class="profileState">
-                <v-list-item-icon>
-                    <v-icon>account_circle</v-icon>
-                </v-list-item-icon>
-                <v-list-item-content>
-                    <v-list-item-title class="sideMenuTitle">Edit Profile</v-list-item-title>
-                </v-list-item-content>
+            <v-list-item prepend-icon="mdi-account-circle" @click=selectButton(profile) :class="profileState">
+                <v-list-item-title class="sideMenuTitle">Edit Profile</v-list-item-title>
             </v-list-item>
         </v-list>
     </v-navigation-drawer>
 </template>
 
 <script>
-    import axios from 'axios'
     export default {
         name: "SideMenu",
         props: {
-            apiKey: String,
             drawer: Boolean
         },
         data: () => ({
-            sources: [],
             errors: [],
             dashboardState: "inactive",
             profileState: "inactive",
             profile: "profile",
             dashboard: "dashboard",
         }),
-        created(){
-            axios.get('https://newsapi.org/v2/sources?apiKey='+this.apiKey)
-                .then(response=>{
-                    this.sources = response.data.sources;
-                    console.log('Sources: ');
-                    console.log(response.data.sources);
-                })
-        },
         methods: {
-            urlToLogo(source) {
-                const hostname = new URL(source.url).hostname
-                return 'https://logo.clearbit.com/'+hostname;
-            },
             selectSource(sourceId){
                 this.$emit('select-source', sourceId);
             },

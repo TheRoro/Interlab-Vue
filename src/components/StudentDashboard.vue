@@ -1,29 +1,29 @@
 <template>
     <v-app id="style-1">
         <v-card>
-            <v-navigation-drawer permanent fixed app clipped-left width="200px" class="size">
-                <v-toolbar flat color="white" dark>
+            <v-navigation-drawer permanent width="200" class="size">
+                <v-toolbar flat color="white">
                     <div>
                         <a href="/">
-                            <img class="logo" :src="require('../assets/interlab2.png')" alt=""/>
+                            <img class="logo" :src="logo" alt="InterLab"/>
                         </a>
                     </div>
                 </v-toolbar>
-                <v-tabs vertical v-model="tab" class="title1">
+                <v-tabs direction="vertical" v-model="tab" class="title1">
                     <v-tab :class="title1" @click="setSelected('Dashboard')">
-                        <v-icon left size="25">home</v-icon>
+                        <v-icon start size="25">mdi-home</v-icon>
                         <v-list-item-title class="hidden">Home</v-list-item-title>
                     </v-tab>
                     <v-tab :class="title3" @click="setSelected('FindInternship')">
-                        <v-icon left size="25">search</v-icon>
+                        <v-icon start size="25">mdi-magnify</v-icon>
                         <v-list-item-title class="hidden">Find Internship</v-list-item-title>
                     </v-tab>
                     <v-tab :class="title2" @click="setSelected('MyRequests')">
-                        <v-icon left size="25">view_list</v-icon>
+                        <v-icon start size="25">mdi-format-list-bulleted</v-icon>
                         <v-list-item-title class="hidden">My Requests</v-list-item-title>
                     </v-tab>
                     <v-tab :class="title4" @click="setSelected('Edit_Profile')">
-                        <v-icon left size="25">account_circle</v-icon>
+                        <v-icon start size="25">mdi-account-circle</v-icon>
                         <v-list-item-title class="hidden">Edit Profile</v-list-item-title>
                     </v-tab>
                 </v-tabs>
@@ -35,30 +35,31 @@
             </v-navigation-drawer>
         </v-card>
         <v-main class="main_content">
-            <v-tabs-items v-model="tab">
-                <v-tab-item>
+            <v-window v-model="tab">
+                <v-window-item>
                     <StudentHome :companies="companies"></StudentHome>
-                </v-tab-item>
-                <v-tab-item>
+                </v-window-item>
+                <v-window-item>
                     <FindInternship :internships="internships"></FindInternship>
-                </v-tab-item>
-                <v-tab-item>
+                </v-window-item>
+                <v-window-item>
                     <MyRequests></MyRequests>
-                </v-tab-item>
-                <v-tab-item>
+                </v-window-item>
+                <v-window-item>
                     <ProfileContent></ProfileContent>
-                </v-tab-item>
-            </v-tabs-items>
+                </v-window-item>
+            </v-window>
         </v-main>
     </v-app>
 </template>
 
 <script>
     import axios from '../api'
-    import StudentHome from "./StudentHome";
-    import FindInternship from "./FindInternship";
-    import ProfileContent from "./ProfileContent";
-    import MyRequests from "./MyRequests";
+    import StudentHome from "./StudentHome.vue";
+    import FindInternship from "./FindInternship.vue";
+    import ProfileContent from "./ProfileContent.vue";
+    import MyRequests from "./MyRequests.vue";
+    import logo from "../assets/interlab2.png";
 
 
     export default {
@@ -71,7 +72,7 @@
             drawer: true,
             internships: [],
             companies: [],
-            img: 'require(\'./assets/logo.jpg\')',
+            logo,
             selected: '',
             title1: 'title',
             title2: 'title',
@@ -79,7 +80,7 @@
             title4: 'title',
             title5: 'title',
             errors: [],
-            tab: null,
+            tab: 0,
             isHidden: true,
             users: []
         }),

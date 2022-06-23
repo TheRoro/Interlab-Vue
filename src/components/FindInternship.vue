@@ -1,8 +1,8 @@
 <template>
-    <v-layout class="internship_body" id="style-1">
+    <div class="internship_body" id="style-1">
             <v-dialog v-model="dialog" width="450">
-                <template v-slot:activator="{ on, attrs }">
-                    <v-flex class="internship_container">
+                <template v-slot:activator="{ props }">
+                    <div class="internship_container">
                         <div v-if="false">
                             <v-text-field v-on:keyup.enter="submit" class="search_bar" type="text" placeholder="Search..."></v-text-field>
                         </div>
@@ -18,7 +18,7 @@
                                                     <h1 class="headline">{{internship.jobTitle}}</h1>
                                                     <v-row>
                                                         <v-col cols="12" sm="1">
-                                                            <v-icon class="location_icon">location_on</v-icon>
+                                                            <v-icon class="location_icon">mdi-map-marker</v-icon>
                                                         </v-col>
                                                         <v-col cols="12" sm="11">
                                                             <v-card-text class="sub-headline">{{ internship.location }}</v-card-text>
@@ -26,7 +26,7 @@
                                                     </v-row>
                                                 </v-col>
                                                 <v-col cols="12" sm="4">
-                                                    <v-btn class="apply_btn" dark v-bind="attrs" v-on="on" @click="selectButton(internship.id)">Apply</v-btn>
+                                                    <v-btn class="apply_btn" v-bind="props" @click="selectButton(internship.id)">Apply</v-btn>
                                                 </v-col>
                                             </v-row>
                                         </div>
@@ -51,7 +51,7 @@
                                                     <h1 class="headline">{{internship.jobTitle}}</h1>
                                                     <v-row>
                                                         <v-col cols="12" sm="1">
-                                                            <v-icon class="location_icon">location_on</v-icon>
+                                                            <v-icon class="location_icon">mdi-map-marker</v-icon>
                                                         </v-col>
                                                         <v-col cols="12" sm="11">
                                                             <v-card-text class="sub-headline">{{ internship.location }}</v-card-text>
@@ -59,7 +59,7 @@
                                                     </v-row>
                                                 </v-col>
                                                 <v-col cols="12" sm="4">
-                                                    <v-btn class="apply_btn" dark v-bind="attrs" v-on="on" @click="selectButton(internship.id)">Apply</v-btn>
+                                                    <v-btn class="apply_btn" v-bind="props" @click="selectButton(internship.id)">Apply</v-btn>
                                                 </v-col>
                                             </v-row>
                                         </div>
@@ -76,18 +76,18 @@
                                 </div>
                             </v-col>
                         </v-row>
-                    </v-flex>
+                    </div>
                 </template>
                 <v-card>
                     <v-card-title>Success!</v-card-title>
                     <v-card-text>Successfully applied to this internship</v-card-text>
                     <v-card-text>Check it out in your requests ;)</v-card-text>
                     <v-card-actions>
-                        <v-btn color="primary" text @click="dialog = false">Continue</v-btn>
+                        <v-btn color="primary" variant="text" @click="dialog = false">Continue</v-btn>
                     </v-card-actions>
                 </v-card>
             </v-dialog>
-    </v-layout>
+    </div>
 </template>
 
 <script>

@@ -74,13 +74,11 @@
                                 ></v-divider>
                                 <v-spacer></v-spacer>
                                 <v-dialog v-model="dialog" max-width="500px">
-                                    <template v-slot:activator="{ on, attrs }">
+                                    <template v-slot:activator="{ props }">
                                         <v-btn
                                                 color="primary"
-                                                dark
                                                 class="mb-2"
-                                                v-bind="attrs"
-                                                v-on="on"
+                                                v-bind="props"
                                         >New Item</v-btn>
                                     </template>
                                     <v-card>
@@ -109,8 +107,8 @@
 
                                         <v-card-actions>
                                             <v-spacer></v-spacer>
-                                            <v-btn color="blue darken-1" text @click="close">Cancel</v-btn>
-                                            <v-btn color="blue darken-1" text @click="save">Save</v-btn>
+                                            <v-btn color="blue-darken-1" variant="text" @click="close">Cancel</v-btn>
+                                            <v-btn color="blue-darken-1" variant="text" @click="save">Save</v-btn>
                                         </v-card-actions>
                                     </v-card>
                                 </v-dialog>
@@ -141,7 +139,7 @@
         <v-card-actions>
             <v-btn v-if="showAcademic" @click="back()">Regresar</v-btn>
             <v-col class="text-right">
-                <v-btn :class="saveButton" @click="saveClick" bottom center class="white--text" color="#4b7bff">Guardar Cambios</v-btn>
+                <v-btn :class="saveButton" @click="saveClick" class="text-white" color="#4b7bff">Guardar Cambios</v-btn>
             </v-col>
         </v-card-actions>
     </v-container>
@@ -165,11 +163,11 @@
                 showAcademic: false,
                 dialog: false,
                 headers: [
-                    { text: 'Company', value: 'company' },
-                    { text: 'Mail Company', value: 'mailcompany' },
-                    { text: 'WebsiteCompany', value: 'websitecompany' },
-                    { text: 'Number Company', value: 'number' },
-                    { text: 'Actions', value: 'actions', sortable: false },
+                    { title: 'Company', key: 'company' },
+                    { title: 'Mail Company', key: 'mailcompany' },
+                    { title: 'WebsiteCompany', key: 'websitecompany' },
+                    { title: 'Number Company', key: 'number' },
+                    { title: 'Actions', key: 'actions', sortable: false },
                 ],
                 desserts: [],
                 editedIndex: -1,
@@ -215,13 +213,14 @@
             },
 
             editItem (item) {
-                this.editedIndex = this.desserts.indexOf(item)
-                this.editedItem = Object.assign({}, item)
+                const row = item.raw || item
+                this.editedIndex = this.desserts.indexOf(row)
+                this.editedItem = Object.assign({}, row)
                 this.dialog = true
             },
 
             deleteItem (item) {
-                const index = this.desserts.indexOf(item)
+                const index = this.desserts.indexOf(item.raw || item)
                 confirm('Are you sure you want to delete this item?') && this.desserts.splice(index, 1)
             },
 

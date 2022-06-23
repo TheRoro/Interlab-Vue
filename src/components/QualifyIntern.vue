@@ -30,17 +30,17 @@
                 selected: [],
                 headers: [
                     {
-                        text: 'Empresa',
+                        title: 'Empresa',
                         align: 'start',
                         sortable: false,
-                        value: 'name',
+                        key: 'name',
                     },
-                    { text: 'Nombres', value: 'nombres' },
-                    { text: 'Apellidos', value: 'apellidos' },
-                    { text: 'Contratado en', value: 'contratados' },
-                    { text: 'Duración', value: 'duraciones' },
-                    { text: 'Cargo', value: 'cargos' },
-                    { text: 'Actions', value: 'actions'}
+                    { title: 'Nombres', key: 'nombres' },
+                    { title: 'Apellidos', key: 'apellidos' },
+                    { title: 'Contratado en', key: 'contratados' },
+                    { title: 'Duración', key: 'duraciones' },
+                    { title: 'Cargo', key: 'cargos' },
+                    { title: 'Actions', key: 'actions'}
                 ],
                 desserts: [
                     {

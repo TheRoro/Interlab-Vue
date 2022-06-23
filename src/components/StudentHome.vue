@@ -1,6 +1,6 @@
 <template>
-    <v-layout class="internship_body" id="style-1">
-        <v-flex class="internship_container">
+    <div class="internship_body" id="style-1">
+        <div class="internship_container">
             <div>
                 <h1 class="welcome">Welcome: {{this.$store.state.firstName}}</h1>
             </div>
@@ -13,7 +13,7 @@
                                 <h1 class="headline">{{ company.name }}</h1>
                                 <v-row>
                                     <v-col cols="12" sm="1">
-                                        <v-icon class="location_icon">location_on</v-icon>
+                                        <v-icon class="location_icon">mdi-map-marker</v-icon>
                                     </v-col>
                                     <v-col cols="12" sm="11">
                                         <v-card-text class="sub-headline">{{ company.city }}, {{ company.country }}</v-card-text>
@@ -32,7 +32,7 @@
                                 <h1 class="headline">{{ company.name }}</h1>
                                 <v-row>
                                     <v-col cols="12" sm="1">
-                                        <v-icon class="location_icon">location_on</v-icon>
+                                        <v-icon class="location_icon">mdi-map-marker</v-icon>
                                     </v-col>
                                     <v-col cols="12" sm="11">
                                         <v-card-text class="sub-headline">{{ company.city }}, {{ company.country }}</v-card-text>
@@ -45,8 +45,8 @@
                     </div>
                 </v-col>
             </v-row>
-        </v-flex>
-    </v-layout>
+        </div>
+    </div>
 </template>
 
 <script>
@@ -133,4 +133,3 @@
         }
     }
 </style>
-
